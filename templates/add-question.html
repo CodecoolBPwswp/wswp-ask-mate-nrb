@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ask question</title>
+    </head>
+    <body>
+    <style>
+        body {
+            background-color: linen;
+        }
+        h1 {
+            color: maroon;
+            margin-left: 40px;
+        }
+        textarea{border: 1px solid;
+            padding: 10px;
+            box-shadow: 5px 5px grey;
+        }
+
+    </style>
+        <h1>Ask new question</h1>
+
+        <form action="/add-question" method='POST'>
+
+            <input type="hidden" id="id" name="id" value="id">
+            <input type="hidden" submission time="submisson_time" name="submisson_time" value="submisson_time">
+            <input type="hidden" view_number="view_number" name="view_number" value="view_number">
+            <input type="hidden" vote_number="vote_number" name="vote_number" value="vote_number">
+
+
+            <label for="title"> Question:</label> <br>
+            <textarea id="title" name="title" rows="1" cols="40" minlength=5 required></textarea><br>
+
+            <label for="message">Message:</label> <br>
+            <textarea id="message" name="message" rows="5" cols="80" required></textarea><br>
+
+
+            <label for="image_path">Image:</label> <br>
+            <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>
+
+
+            <label for="submit_button"></label> <br>
+            <input id = "submit_button" type="submit" value= "Add new question"></button><br>
+
+            <label for="submit_button"></label> <br>
+            <input id = "submit_button" type="submit" value= "Back to questions"></button><br>
+
+        </form>
+    </body>
+</html>
