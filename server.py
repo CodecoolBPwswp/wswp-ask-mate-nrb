@@ -15,13 +15,22 @@ def display_question():
 
 
 @app.route('/add-question')
-def add_question()
-    pass
+def add_question():
+    return render_template("add-question.html")
 
 
 @app.route('/add-question', methods=['POST'])
-def adding_question():
-    pass
+def saving_add_question():
+    if request.method == 'POST':
+        'id' = request.form['id']
+        'submisson_time'= request.form['submisson_time"']
+        "view_number" = request.form["view_number"]
+        "vote_number" = request.form["vote_number"]
+        "title" = request.form["title"]
+        "message" = request.form["message" ]
+        "image_path" = request.form["image_path"]
+
+        return redirect(url_for('/question/<question_id>'))
 
 
 @app.route('/question/<question_id>/new-answer')
