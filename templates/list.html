@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Ask Mate!</title>
+    </head>
+
+    <body>
+        <h1>Ask Mate!</h1>
+        <table width=100%>
+            <tr>
+                {% for title in question_headers %}
+                        <th>{{ title }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in data %}
+            <tr>
+                {% for item in row %}
+                    {% if item != "image" and item != "vote_number" %}
+                        <td>{{ row[item] }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
