@@ -58,7 +58,7 @@ def add_question():
 @app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
-        id = '0'
+        id = util.generate_question_id()
         submission_time= util.get_timestamp()
         view_number= '0'
         vote_number = '0'
