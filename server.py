@@ -20,7 +20,6 @@ def index():
             continue
         else:
             data_header.append(item)
-    print(data_header)
     return render_template('list.html', data=old_data,
                                         question_headers=data_manager.QUESTION_HEADER_TITLES,
                                         data_header=data_header)

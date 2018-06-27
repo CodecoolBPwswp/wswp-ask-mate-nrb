@@ -10,8 +10,8 @@ def get_timestamp():
     return time_stamp
 
 
-def readable_time_stamp(time_stamp):
-    converted_time_stamp = int(time_stamp).strftime("%Y-%m-%d %H:%M:%S")
+def readable_time_stamp(any_list):
+    for row in any_ int(time_stamp).strftime("%Y-%m-%d %H:%M:%S")
     return converted_time_stamp
 
 
