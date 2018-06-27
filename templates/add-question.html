@@ -23,12 +23,6 @@
 
         <form action="/add-question" method='POST'>
 
-            <input type="hidden" id="id" name="id" value="id">
-            <input type="hidden" submission time="submisson_time" name="submisson_time" value="submisson_time">
-            <input type="hidden" view_number="view_number" name="view_number" value="view_number">
-            <input type="hidden" vote_number="vote_number" name="vote_number" value="vote_number">
-
-
             <label for="title"> Question:</label> <br>
             <textarea id="title" name="title" rows="1" cols="40" minlength=5 required></textarea><br>
 
@@ -41,9 +35,10 @@
 
 
             <label for="submit_button"></label> <br>
-            <input id = "submit_button" type="submit" value= "Add new question"></button><br>
+            <input id = "submit_button" type="submit" value= "Add New Question"></button><br>
 
-
+            <label for="submit_button"></label> <br>
+            <input id = "submit_button" type="submit" value= "Back To The List"></button><br>
         </form>
     </body>
 </html>
