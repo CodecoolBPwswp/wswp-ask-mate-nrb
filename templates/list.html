@@ -3,10 +3,28 @@
 <html>
     <head>
         <title>Ask Mate!</title>
+        <style>
+
+            table, th, td
+            {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td
+            {
+                padding: 15px;
+            }
+            #add_question
+            {
+                -webkit-appearance: button;
+                appearance: button;
+            }
+        </style>
     </head>
 
     <body>
         <h1>Ask Mate!</h1>
+        <p><a id="add_question" href="/add-question">Add question</a></p>
         <table width=100%>
             <tr>
                 {% for title in question_headers %}
@@ -22,7 +40,7 @@
                         {% if item == "title" %}
                             <a href="/question/{{ row['id'] }}">{{ row[item] }}</a>
                             {% else %}
-                            {{ row[item] }}
+                                {{ row[item] }}
                             {% endif %}
                     </td>
                 {% endfor %}
