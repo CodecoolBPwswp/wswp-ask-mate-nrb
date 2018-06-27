@@ -1,5 +1,6 @@
 from flask import Flask, request, url_for, session, render_template, redirect
 
+
 import data_manager
 
 app = Flask(__name__)
@@ -8,7 +9,12 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/list')
 def index():
-    return render_template('list.html', data=data_manager.read_all_questions(),
+    old_data = data_manager.read_all_questions()
+    for row in old_data:
+        for item in row:
+            if item == "submission_time":
+                row[item] =
+    return render_template('list.html', data=old_data,
                                         question_headers=data_manager.QUESTION_HEADER_TITLES)
 
 
