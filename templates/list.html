@@ -11,18 +11,20 @@
             <tr>
                 {% for title in question_headers %}
                         <th>
-                            {% if title == "title" %}
-                            <a href="/question/{{ row['id'] }}">{{ title }}</a>
-                            {% else %}
                             {{ title }}
-                            {% endif %}
                         </th>
                 {% endfor %}
             </tr>
             {% for row in data %}
             <tr>
                 {% for item in data_header %}
-                    <td>{{ row[item] }}</td>
+                    <td>
+                        {% if item == "title" %}
+                            <a href="/question/{{ row['id'] }}">{{ row[item] }}</a>
+                            {% else %}
+                            {{ row[item] }}
+                            {% endif %}
+                    </td>
                 {% endfor %}
             </tr>
             {% endfor %}
