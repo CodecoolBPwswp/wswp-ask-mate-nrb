@@ -1,8 +1,13 @@
-import time
-from datetime import datetime, timezone
+import time, connection
+from datetime import datetime
 
-def get_id():
-    pass
+
+def generate_id(data_list):
+    ids=[]
+    for row in data_list:
+        ids.append(int(row['id']))
+    new_id = max(ids)+1
+    return new_id
 
 
 def get_timestamp():
