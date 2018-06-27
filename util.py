@@ -6,7 +6,7 @@ def get_id():
 
 
 def get_timestamp():
-    time_stamp = time.time()
+    time_stamp = int(time.time())
     return time_stamp
 
 

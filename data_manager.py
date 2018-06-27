@@ -6,3 +6,6 @@ QUESTION_HEADER_TITLES = ['ID', 'Submission Time', 'Viewed', 'Title', 'Question'
 
 def read_all_questions():
     return connection.get_all_questions()
+
+def write_question(question):
+    return connection.save_question(question, DATA_HEADER_QUESTION)
