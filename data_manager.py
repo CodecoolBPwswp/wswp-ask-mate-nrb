@@ -5,4 +5,5 @@ DATA_HEADER_QUESTION = ['id', 'submission_time', 'view_number', 'vote_number', '
 QUESTION_HEADER_TITLES = ['ID', 'Submission Time', 'Viewed', 'Title', 'Question']
 
 def read_all_questions():
-    return connection.get_all_questions()
+    all_questions = connection.get_all_questions()
+    return all_questions
