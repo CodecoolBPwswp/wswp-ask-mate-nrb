@@ -15,10 +15,8 @@
             </tr>
             {% for row in data %}
             <tr>
-                {% for item in row %}
-                    {% if item != "image" and item != "vote_number" %}
-                        <td>{{ row[item] }}</td>
-                    {% endif %}
+                {% for item in data_headers %}
+                    <td>{{ row[item] }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
