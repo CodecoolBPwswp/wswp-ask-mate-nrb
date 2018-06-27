@@ -22,13 +22,14 @@ def add_question():
 @app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
-        'id' = request.form['id']
-        'submisson_time'= request.form['submisson_time"']
-        "view_number" = request.form["view_number"]
-        "vote_number" = request.form["vote_number"]
-        "title" = request.form["title"]
-        "message" = request.form["message" ]
-        "image_path" = request.form["image_path"]
+        id = util.ge
+        submisson_time=util.get_timestamp()
+        view_number= '0'
+        vote_number = '0'
+        title = request.form["title"]
+        message = request.form["message" ]
+        image_path = request.form["image_path"]
+        row ={'id':id, 'submisson_time': submisson_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image_path':image_path}
 
         return redirect(url_for('/question/<question_id>'))
 

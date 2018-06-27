@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/wswp-ask-mate-nrb.iml" filepath="$PROJECT_DIR$/.idea/wswp-ask-mate-nrb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../wswp-ask-mate-nrb/.idea/wswp-ask-mate-nrb.iml" filepath="$PROJECT_DIR$/../../wswp-ask-mate-nrb/.idea/wswp-ask-mate-nrb.iml" />
     </modules>
   </component>
 </project>

@@ -14,3 +14,9 @@ def get_all_questions():
     all_questions = [row for row in input_file]
 
     return all_questions
+
+def save_question(fieldnames, row):
+    with open("sample_data/question.csv", 'a') as inFile:
+
+        writer = csv.DictWriter(inFIle, fieldnames=fieldnames)
+        writer.writerow(row)
