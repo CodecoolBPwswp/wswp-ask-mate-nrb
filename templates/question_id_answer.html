@@ -36,12 +36,38 @@
              <td>{{ question.image }}</td>
          </tr>
      </table>
+
+     <br>
+     <a href='/list'>
+        <button>Back To The List</button>
+     </a>
+     <br><br>
+     {% if not new_answer %}
+     <a href='/question/{{ question.id }}/new-answer'>
+        <button>Add New Answer</button>
+     </a>
+     {% endif %}
+
+
+     {%  if new_answer %}
+     <form action='/question/{{ question_id }}/new-answer' method='POST'>
+         <label for="message">Message:</label> <br>
+         <textarea id="message" name="message" rows="5" cols="80" required></textarea><br>
+
+         <label for="image_path">Image:</label> <br>
+         <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>
+
+        <input type="submit" value="Submit">
+     </form>
+     {% endif %}
+
+
+
      <table style="width:100%">
         <tr>
             <th>Id</th>
             <th>Submission Time</th>
             <th>Vote Number</th>
-            <th>Question Id</th>
             <th>Message</th>
             <th>Image</th>
         </tr>
@@ -52,21 +78,13 @@
             <td>{{ answer.id }}</td>
             <td>{{ answer.submission_time }}</td>
             <td>{{ answer.vote_number }}</td>
-            <td>{{ answer.question_id }}</td>
             <td>{{ answer.message }} </td>
             <td>{{ answer.image }} </td>
         </tr>
             {%  endfor %}
      </table>
 
-    <br>
-    <a href='/list'>
-        <button>Back To The List</button>
-    </a>
-    <br><br>
-    <a href='/add-question'>
-        <button>Add New Answer</button>
-    </a>
+
 
 </body>
 </html>
