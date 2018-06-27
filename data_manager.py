@@ -7,3 +7,7 @@ QUESTION_HEADER_TITLES = ['ID', 'Submission Time', 'Viewed', 'Title', 'Question'
 def read_all_questions():
     all_questions = connection.get_all_questions()
     return all_questions
+
+def read_all_answers():
+    all_answers = connection.get_all_answers()
+    return all_answers
