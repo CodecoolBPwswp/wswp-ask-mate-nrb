@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+     <style>
+         table, th, td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        }
+                th, td {
+                        padding: 15px;
+     </style>
+
+</head>
+<body>
+
+     <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Submission Time</th>
+            <th>View Number</th>
+            <th>Vote Number</th>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Image</th>
+        </tr>
+
+         <tr>
+             <td>{{ question.id }}</td>
+             <td>{{ question.submission_time }}</td>
+             <td>{{ question.view_number }}</td>
+             <td>{{ question.vote_number }}</td>
+             <td>{{ question.title }}</td>
+             <td>{{ question.message }}</td>
+             <td>{{ question.image }}</td>
+         </tr>
+     </table>
+     <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Submission Time</th>
+            <th>Vote Number</th>
+            <th>Question Id</th>
+            <th>Message</th>
+            <th>Image</th>
+        </tr>
+        <br> <br>
+        <tr>
+            {% for answer in all_display_answer %}
+        <tr>
+            <td>{{ answer.id }}</td>
+            <td>{{ answer.submission_time }}</td>
+            <td>{{ answer.vote_number }}</td>
+            <td>{{ answer.question_id }}</td>
+            <td>{{ answer.message }} </td>
+            <td>{{ answer.image }} </td>
+        </tr>
+            {%  endfor %}
+     </table>
+
+</body>
+</html>
