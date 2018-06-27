@@ -67,7 +67,7 @@ def saving_add_question():
         image = request.form["image_path"]
         row ={'id':id, 'submission_time': submission_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image':image}
         data_manager.write_question(row)
-        return redirect(url_for('add_question'))
+        return redirect('/question/{}'.format(id))
 
 
 
