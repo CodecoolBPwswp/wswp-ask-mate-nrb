@@ -22,7 +22,7 @@ def add_question():
     return render_template("add-question.html")
 
 
-@app.route('/add-question', methods=['POST'])
+"""@app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
         'id' = request.form['id']
@@ -33,7 +33,7 @@ def saving_add_question():
         "message" = request.form["message" ]
         "image_path" = request.form["image_path"]
 
-        return redirect(url_for('/question/<question_id>'))
+        return redirect(url_for('/question/<question_id>'))"""
 
 
 @app.route('/question/<question_id>/new-answer')
