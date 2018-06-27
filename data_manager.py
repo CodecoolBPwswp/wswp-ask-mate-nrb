@@ -9,3 +9,7 @@ def read_all_questions():
 
 def write_question(question):
     return connection.save_question(question, DATA_HEADER_QUESTION)
+
+
+def read_all_answers():
+    return connection.get_all_answers()
