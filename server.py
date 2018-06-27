@@ -19,6 +19,7 @@ def index():
             continue
         else:
             data_header.append(item)
+    old_data = util.readable_time_stamp(old_data)
     return render_template('list.html', data=old_data,
                                         question_headers=data_manager.QUESTION_HEADER_TITLES,
                                         data_header=data_header)

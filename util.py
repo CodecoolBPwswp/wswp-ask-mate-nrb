@@ -16,8 +16,9 @@ def get_timestamp():
 
 
 def readable_time_stamp(any_list):
-    for row in any_list int(time_stamp).strftime("%Y-%m-%d %H:%M:%S")
-    return converted_time_stamp
+    for row in any_list:
+        row['submission_time'] = datetime.fromtimestamp(int(row['submission_time'])).strftime("%Y-%m-%d %H:%M:%S")
+    return any_list
 
 
 def get_vote_num():
