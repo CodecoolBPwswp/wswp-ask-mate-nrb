@@ -2,6 +2,9 @@ from flask import Flask, request, url_for, session, render_template, redirect
 import connection
 import util
 import data_manager
+import util, data_manager
+
+
 
 app = Flask(__name__)
 
@@ -44,21 +47,23 @@ def display_question(question_id):
 
 @app.route('/add-question')
 def add_question():
-    return render_template("add-question.html")
+    return render_template('/add-question.html')
 
 
-"""@app.route('/add-question', methods=['POST'])
+@app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
-        'id' = request.form['id']
-        'submisson_time'= request.form['submisson_time"']
-        "view_number" = request.form["view_number"]
-        "vote_number" = request.form["vote_number"]
-        "title" = request.form["title"]
-        "message" = request.form["message" ]
-        "image_path" = request.form["image_path"]
+        id = util.generate_question_id()
+        submission_time= util.get_timestamp()
+        view_number= '0'
+        vote_number = '0'
+        title = request.form["title"]
+        message = request.form["message" ]
+        image = request.form["image_path"]
+        row ={'id':id, 'submission_time': submission_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image':image}
+        data_manager.write_question(row)
+        return redirect('/question/{}'.format(id))
 
-        return redirect(url_for('/question/<question_id>'))"""
 
 
 @app.route('/question/<question_id>/new-answer')
