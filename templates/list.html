@@ -10,7 +10,13 @@
         <table width=100%>
             <tr>
                 {% for title in question_headers %}
-                        <th>{{ title }}</th>
+                        <th>
+                            {% if title == "title" %}
+                            <a href="/question/{{ row['id'] }}">{{ title }}</a>
+                            {% else %}
+                            {{ title }}
+                            {% endif %}
+                        </th>
                 {% endfor %}
             </tr>
             {% for row in data %}
