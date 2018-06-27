@@ -2,15 +2,13 @@ import time, connection
 from datetime import datetime
 
 
-def generate_question_id():
+def generate_id(data_list):
     ids=[]
-    for row in connection.get_all_questions():
+    for row in data_list:
         ids.append(int(row['id']))
     new_id = max(ids)+1
     return new_id
 
-
-generate_question_id()
 
 def get_timestamp():
     time_stamp = int(time.time())
