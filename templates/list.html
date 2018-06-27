@@ -10,15 +10,21 @@
         <table width=100%>
             <tr>
                 {% for title in question_headers %}
-                        <th>{{ title }}</th>
+                        <th>
+                            {{ title }}
+                        </th>
                 {% endfor %}
             </tr>
             {% for row in data %}
             <tr>
-                {% for item in row %}
-                    {% if item != "image" and item != "vote_number" %}
-                        <td>{{ row[item] }}</td>
-                    {% endif %}
+                {% for item in data_header %}
+                    <td>
+                        {% if item == "title" %}
+                            <a href="/question/{{ row['id'] }}">{{ row[item] }}</a>
+                            {% else %}
+                            {{ row[item] }}
+                            {% endif %}
+                    </td>
                 {% endfor %}
             </tr>
             {% endfor %}
