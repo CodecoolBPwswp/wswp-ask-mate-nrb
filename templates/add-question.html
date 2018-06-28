@@ -24,15 +24,10 @@
         <form action="/add-question" method='POST'>
 
             <label for="title"> Question:</label> <br>
-            <textarea id="title" name="title" rows="1" cols="40" minlength=5 required></textarea><br>
+            <textarea id="title" name="title" rows="1" cols="40" minlength=5  maxlength=500 required></textarea><br>
 
             <label for="message">Message:</label> <br>
-            <textarea id="message" name="message" rows="5" cols="80" required></textarea><br>
-
-
-            <label for="image_path">Image:</label> <br>
-            <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>
-
+            <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
 
             <label for="submit_button"></label> <br>
             <input id = "submit_button" type="submit" value= "Add New Question"></button><br>

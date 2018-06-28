@@ -64,8 +64,8 @@ def saving_add_question():
         vote_number = '0'
         title = request.form["title"]
         message = request.form["message" ]
-        image = request.form["image_path"]
-        row ={'id':id, 'submission_time': submission_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image':image}
+
+        row ={'id':id, 'submission_time': submission_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image':''}
         data_manager.write_question(row)
         return redirect('/question/{}'.format(id))
 
@@ -109,7 +109,6 @@ def adding_answer(question_id):
     new_answer = {'id':id ,'submission_time':submission_time,'vote_number':vote_number,'question_id':question_id,'message':message, 'image':''}
     data_manager.write_answer(new_answer)
     return redirect('/question/{}'.format(question_id))
-
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
