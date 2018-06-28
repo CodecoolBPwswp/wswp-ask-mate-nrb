@@ -34,9 +34,14 @@ def display_question(question_id):
     display_question = None
     display_answer = []
 
+    all_question = util.readable_time_stamp(all_question)
+    all_answer = util.readable_time_stamp(all_answer)
+
     for question in all_question:
         if question_id == question['id']:
             display_question = question
+
+
     for answer in all_answer:
         if question_id == answer['question_id']:
             display_answer.append(answer)
@@ -65,7 +70,6 @@ def saving_add_question():
         return redirect('/question/{}'.format(id))
 
 
-
 @app.route('/question/<question_id>/new-answer')
 def add_answer(question_id):
     all_question = data_manager.read_all_questions()
@@ -73,6 +77,9 @@ def add_answer(question_id):
 
     display_question = None
     display_answer = []
+
+    all_question = util.readable_time_stamp(all_question)
+    all_answer = util.readable_time_stamp(all_answer)
 
     for question in all_question:
         if question_id == question['id']:
@@ -87,15 +94,21 @@ def add_answer(question_id):
 
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
 def adding_answer(question_id):
-    id = '0'
+    all_answer = data_manager.read_all_answers()
+    display_answer = []
+    for answer in all_answer:
+        if question_id == answer['question_id']:
+            display_answer.append(answer)
+
+    id = util.generate_id(display_answer)
     submission_time = util.get_timestamp()
     vote_number= '0'
     question_id = question_id
     message = request.form['message']
-    image = request.form['image_path']
-    # new_answer = {'id':id ,'submission_time':submission_time,'vote_number':vote_number,'question_id':question_id,'message':message, 'image':image}
-
-
+    # image = request.form['image_path']
+    new_answer = {'id':id ,'submission_time':submission_time,'vote_number':vote_number,'question_id':question_id,'message':message, 'image':''}
+    data_manager.write_answer(new_answer)
+    return redirect('/question/{}'.format(question_id))
 
 if __name__ == '__main__':
     app.run(

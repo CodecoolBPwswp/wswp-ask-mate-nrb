@@ -19,3 +19,8 @@ def save_question(question, fieldnames):
     with open("sample_data/question.csv", 'a') as inFile:
         writer = csv.DictWriter(inFile, fieldnames=fieldnames)
         writer.writerow(question)
+
+def save_answer(answer, fieldnames):
+    with open("sample_data/answer.csv", 'a') as inFile:
+        writer = csv.DictWriter(inFile, fieldnames=fieldnames)
+        writer.writerow(answer)

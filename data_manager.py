@@ -13,3 +13,6 @@ def write_question(question):
 
 def read_all_answers():
     return connection.get_all_answers()
+
+def write_answer(answer):
+    return connection.save_answer(answer, DATA_HEADER_ANSWER)

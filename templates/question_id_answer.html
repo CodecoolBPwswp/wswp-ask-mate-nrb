@@ -23,7 +23,7 @@
             <th>Vote Number</th>
             <th>Title</th>
             <th>Message</th>
-            <th>Image</th>
+{#            <th>Image</th>#}
         </tr>
 
          <tr>
@@ -33,7 +33,7 @@
              <td>{{ question.vote_number }}</td>
              <td>{{ question.title }}</td>
              <td>{{ question.message }}</td>
-             <td>{{ question.image }}</td>
+{#             <td>{{ question.image }}</td>#}
          </tr>
      </table>
 
@@ -51,11 +51,11 @@
 
      {%  if new_answer %}
      <form action='/question/{{ question_id }}/new-answer' method='POST'>
-         <label for="message">Message:</label> <br>
+         <label for="message">Please write your answer:</label> <br>
          <textarea id="message" name="message" rows="5" cols="80" required></textarea><br>
 
-         <label for="image_path">Image:</label> <br>
-         <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>
+{#         <label for="image_path">Image:</label> <br>#}
+{#         <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>#}
 
         <input type="submit" value="Submit">
      </form>
@@ -69,7 +69,7 @@
             <th>Submission Time</th>
             <th>Vote Number</th>
             <th>Message</th>
-            <th>Image</th>
+{#            <th>Image</th>#}
         </tr>
         <br> <br>
         <tr>
@@ -79,7 +79,7 @@
             <td>{{ answer.submission_time }}</td>
             <td>{{ answer.vote_number }}</td>
             <td>{{ answer.message }} </td>
-            <td>{{ answer.image }} </td>
+{#            <td>{{ answer.image }} </td>#}
         </tr>
             {%  endfor %}
      </table>
