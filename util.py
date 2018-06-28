@@ -6,6 +6,10 @@ def generate_id(data_list):
     ids=[]
     for row in data_list:
         ids.append(int(row['id']))
+
+    if ids == []:
+        return '1'
+
     new_id = max(ids)+1
     return new_id
 
