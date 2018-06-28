@@ -52,7 +52,7 @@
      {%  if new_answer %}
      <form action='/question/{{ question_id }}/new-answer' method='POST'>
          <label for="message">Please write your answer:</label> <br>
-         <textarea id="message" name="message" rows="5" cols="80" required></textarea><br>
+         <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
 
 {#         <label for="image_path">Image:</label> <br>#}
 {#         <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>#}
