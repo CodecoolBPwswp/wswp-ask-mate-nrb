@@ -5,28 +5,12 @@
         <meta charset="UTF-8">
         <title>Ask Mate!</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-        <style>
-            table, th, td
-            {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-            th, td
-            {
-                padding: 15px;
-            }
-            #add_question
-            {
-                -webkit-appearance: button;
-                appearance: button;
-            }
-        </style>
     </head>
 
     <body>
         <h1>Ask Mate!</h1>
         <p><a id="add_question" href="/add-question">Add question</a></p>
-        <table width=100%>
+        <table>
             <tr>
                 {% for title in question_headers %}
                         <th>

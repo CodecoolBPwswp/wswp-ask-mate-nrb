@@ -4,19 +4,11 @@
     <meta charset="UTF-8">
     <title>Question</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-     <style>
-         table, th, td {
-                        border: 1px solid black;
-                        border-collapse: collapse;
-                        }
-                th, td {
-                        padding: 15px;
-     </style>
 
 </head>
 <body>
     <h1>{{ question.title }}</h1><br/>
-     <table style="width:100%">
+     <table>
         <tr>
             <th>Id</th>
             <th>Submission Time</th>
@@ -60,7 +52,7 @@
 
 
 
-     <table style="width:100%">
+     <table>
         <tr>
             <th>Id</th>
             <th>Submission Time</th>
