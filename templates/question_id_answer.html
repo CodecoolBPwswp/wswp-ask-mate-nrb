@@ -7,22 +7,26 @@
 
 </head>
 <body>
-    <h1>{{ question.title }}</h1><br/>
+    <h1>{{ question_by_id.title }}</h1><br/>
      <table>
         <tr>
             <th>Id</th>
             <th>Submission Time</th>
+            <th>View Number</th>
+            <th>Vote Number</th>
             <th>Title</th>
             <th>Message</th>
-{#            <th>Image</th>#}
+            <th>Image</th>
         </tr>
 
          <tr>
-             <td>{{ question.id }}</td>
-             <td>{{ question.submission_time }}</td>
-             <td>{{ question.title }}</td>
-             <td>{{ question.message }}</td>
-{#             <td>{{ question.image }}</td>#}
+             <td>{{ question_by_id.id }}</td>
+             <td>{{ question_by_id.submission_time }}</td>
+             <td>{{ question_by_id.view_number }}</td>
+             <td>{{ question_by_id.vote_number }}</td>
+             <td>{{ question_by_id.title }}</td>
+             <td>{{ question_by_id.message }}</td>
+             <td>{{ question_by_id.image }}</td>
          </tr>
      </table>
 
@@ -30,44 +34,47 @@
      <a href='/list'>
         <button>Back To The List</button>
      </a>
-     <br><br>
+    <br><br>
+
      {% if not new_answer %}
-     <a href='/question/{{ question.id }}/new-answer'>
-        <button>Add New Answer</button>
-     </a>
+         <a href='/question/{{ question_by_id.id }}/new-answer'>
+            <button>Add New Answer</button>
+         </a>
      {% endif %}
 
 
      {%  if new_answer %}
-     <form action='/question/{{ question_id }}/new-answer' method='POST'>
-         <label for="message">Please write your answer:</label> <br>
-         <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
+         <form action='/question/{{ question_by_id.id }}/new-answer' method='POST'>
+             <label for="message">Please write your answer:</label> <br>
+             <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
 
-{#         <label for="image_path">Image:</label> <br>#}
-{#         <textarea id="image_path" name="image_path" rows="2" cols="80" required></textarea><br>#}
+             <label for="image_path">Image:</label> <br>
+             <textarea id="image_path" name="image_path" rows="2" cols="80" ></textarea><br>
 
-        <input type="submit" value="Submit">
-     </form>
+            <input type="submit" value="Submit">
+         </form>
      {% endif %}
 
 
-
+    <br><br>
      <table>
         <tr>
             <th>Id</th>
             <th>Submission Time</th>
+            <th>Vote Number</th>
             <th>Message</th>
-{#            <th>Image</th>#}
+            <th>Image</th>
         </tr>
-        <br> <br>
+
         <tr>
-            {% for answer in all_display_answer %}
-        <tr>
-            <td>{{ answer.id }}</td>
-            <td>{{ answer.submission_time }}</td>
-            <td>{{ answer.message }} </td>
-{#            <td>{{ answer.image }} </td>#}
-        </tr>
+            {% for answer in answers_by_question_id %}
+                <tr>
+                    <td>{{ answer.id }}</td>
+                    <td>{{ answer.submission_time }}</td>
+                    <td>{{ answer.vote_number }}</td>
+                    <td>{{ answer.message }} </td>
+                    <td>{{ answer.image }} </td>
+                </tr>
             {%  endfor %}
      </table>
 

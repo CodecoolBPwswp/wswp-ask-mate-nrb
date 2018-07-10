@@ -15,8 +15,23 @@ def read_all_questions(cursor):
 
 
 @connection.connection_handler
-def
+def get_question_by_id(cursor, id):
+    query = """
+                SELECT * FROM question
+                WHERE id=%(id)s"""
+    cursor.execute(query, {'id': id})
+    question_by_id=cursor.fetchone()
+    return question_by_id
 
+
+@connection.connection_handler
+def get_answer_by_question_id(cursor, id):
+    query = """
+                SELECT * FROM answer
+                WHERE question_id = %(id)s"""
+    cursor.execute(query, {'id': id})
+    answer_by_question_id=cursor.fetchall()
+    return answer_by_question_id
 
 
 def write_question(question):
@@ -26,5 +41,16 @@ def write_question(question):
 def read_all_answers():
     return connection.get_all_answers()
 
-def write_answer(answer):
-    return connection.save_answer(answer, DATA_HEADER_ANSWER)
+@connection.connection_handler
+def add_answer_by_question_id(cursor, new_answer):
+    vote_number = new_answer['vote_number']
+    question_id = new_answer['question_id']
+    message = new_answer['message']
+    image = new_answer['image']
+
+    query = """
+            INSERT INTO answer (vote_number, question_id, message, image)
+            VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
+            """
+    cursor.execute(query, {'vote_number': vote_number, 'question_id': question_id, 'message': message, 'image': image})
+
