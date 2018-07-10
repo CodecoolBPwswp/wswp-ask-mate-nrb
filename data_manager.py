@@ -43,14 +43,9 @@ def read_all_answers():
 
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
-    vote_number = new_answer['vote_number']
-    question_id = new_answer['question_id']
-    message = new_answer['message']
-    image = new_answer['image']
 
     query = """
             INSERT INTO answer (vote_number, question_id, message, image)
             VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
             """
-    cursor.execute(query, {'vote_number': vote_number, 'question_id': question_id, 'message': message, 'image': image})
-
+    cursor.execute(query, new_answer)
