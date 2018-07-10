@@ -12,17 +12,9 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/list')
 def index():
-    old_data = data_manager.read_all_questions()
-    data_header = []
-    for item in data_manager.DATA_HEADER_QUESTION:
-        if item == "vote_number" or item == "image":
-            continue
-        else:
-            data_header.append(item)
-    old_data = util.readable_time_stamp(old_data)
-    return render_template('list.html', data=old_data,
-                                        question_headers=data_manager.QUESTION_HEADER_TITLES,
-                                        data_header=data_header)
+    all_questions = data_manager.read_all_questions()
+    print(all_questions)
+    return render_template('list.html', all_questions=all_questions)
 
 
 @app.route('/question/<question_id>')

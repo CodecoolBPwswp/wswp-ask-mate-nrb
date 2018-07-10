@@ -12,24 +12,24 @@
         <p><a id="add_question" href="/add-question">Add question</a></p>
         <table>
             <tr>
-                {% for title in question_headers %}
-                        <th>
-                            {{ title }}
-                        </th>
-                {% endfor %}
+                <th>ID</th>
+                <th>Submission Time</th>
+                <th>View Number</th>
+                <th>Vote Number</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Image</th>
             </tr>
-            {% for row in data %}
-            <tr>
-                {% for item in data_header %}
-                    <td>
-                        {% if item == "title" %}
-                            <a href="/question/{{ row['id'] }}">{{ row[item] }}</a>
-                            {% else %}
-                                {{ row[item] }}
-                            {% endif %}
-                    </td>
-                {% endfor %}
-            </tr>
+            {% for question in all_questions %}
+                <tr>
+                    <td>{{ question.id }}</td>
+                    <td>{{ question.submission_time }}</td>
+                    <td>{{ question.view_number }}</td>
+                    <td>{{ question.vote_number }}</td>
+                    <td><a href="/question/{{ question.id }}">{{ question.title }}</a></td>
+                    <td>{{ question.message }}</td>
+                    <td>{{ question.image }}</td>
+                </tr>
             {% endfor %}
         </table>
     </body>
