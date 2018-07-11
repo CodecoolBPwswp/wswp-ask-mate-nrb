@@ -1,5 +1,9 @@
 import connection
 
+DATA_HEADER_ANSWER = ['id' ,'submission_time','vote_number','question_id','message', 'image']
+DATA_HEADER_QUESTION = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
+QUESTION_HEADER_TITLES = ['ID', 'Submission Time', 'Viewed', 'Title', 'Question']
+
 
 @connection.connection_handler
 def read_all_questions(cursor):
@@ -28,6 +32,32 @@ def get_answer_by_question_id(cursor, id):
     cursor.execute(query, {'id': id})
     answer_by_question_id=cursor.fetchall()
     return answer_by_question_id
+
+@connection.connection_handler
+def write_question(cursor, question):
+    question['vote_number'] = 0
+    question['view_number'] = 0
+    query = """
+               INSERT INTO question(submission_time, view_number, vote_number, title, message, image)
+               VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s)
+               """
+    cursor.execute(query, question)
+
+@connection.connection_handler
+def get_question_id(cursor, title):
+    queryID ="""
+        SELECT id FROM question
+        WHERE title = %(title)s"""
+    cursor.execute(queryID, {'title': title})
+    question_id = cursor.fetchall()
+    return question_id
+
+
+
+
+
+def read_all_answers():
+    return connection.get_all_answers()
 
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
