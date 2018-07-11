@@ -56,20 +56,15 @@ def add_question():
 @app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
-        id = util.generate_id(data_manager.read_all_questions())
+
         submission_time= util.get_timestamp()
-        view_number= '0'
-        vote_number = '0'
         title = request.form["title"]
         message = request.form["message" ]
 
-        row ={'id':id, 'submission_time': submission_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image':''}
-        data_manager.write_question(row)
-        return redirect('/question/{}'.format(id))
-
-
-
-
+        question={'submission_time': submission_time,'title':title, 'message': message,'image':''}
+        data_manager.write_question(question)
+        ID = data_manager.get_question_id(title)
+        return redirect('/question/{}'.format(ID[0]['id']))
 
 
 

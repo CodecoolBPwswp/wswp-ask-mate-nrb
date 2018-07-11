@@ -33,9 +33,27 @@ def get_answer_by_question_id(cursor, id):
     answer_by_question_id=cursor.fetchall()
     return answer_by_question_id
 
+@connection.connection_handler
+def write_question(cursor, question):
+    question['vote_number'] = 0
+    question['view_number'] = 0
+    query = """
+               INSERT INTO question(submission_time, view_number, vote_number, title, message, image)
+               VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s)
+               """
+    cursor.execute(query, question)
 
-def write_question(question):
-    return connection.save_question(question, DATA_HEADER_QUESTION)
+@connection.connection_handler
+def get_question_id(cursor, title):
+    queryID ="""
+        SELECT id FROM question
+        WHERE title = %(title)s"""
+    cursor.execute(queryID, {'title': title})
+    question_id = cursor.fetchall()
+    return question_id
+
+
+
 
 
 def read_all_answers():
