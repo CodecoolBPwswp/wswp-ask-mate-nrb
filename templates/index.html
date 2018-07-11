@@ -9,6 +9,7 @@
 
     <body>
         <h1>Ask Mate!</h1>
+        <p><a id="display_all_question" href="/list">See all question</a></p><br>
         <p><a id="add_question" href="/add-question">Add question</a></p>
         <table>
             <tr>
@@ -20,7 +21,7 @@
                 <th>Message</th>
                 <th>Image</th>
             </tr>
-            {% for question in all_questions %}
+            {% for question in last_five_question %}
                 <tr>
                     <td>{{ question.id }}</td>
                     <td>{{ question.submission_time }}</td>

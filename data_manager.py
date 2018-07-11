@@ -39,3 +39,12 @@ def add_answer_by_question_id(cursor, new_answer):
             VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
             """
     cursor.execute(query, new_answer)
+
+@connection.connection_handler
+def read_the_last_five_question(cursor):
+    query = """
+            SELECT * FROM question
+            LIMIT 5"""
+    cursor.execute(query)
+    last_five_question=cursor.fetchall()
+    return last_five_question
