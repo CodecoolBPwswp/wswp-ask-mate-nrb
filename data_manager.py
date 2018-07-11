@@ -1,10 +1,6 @@
 import connection
 import util
 
-DATA_HEADER_ANSWER = ['id' ,'submission_time','vote_number','question_id','message', 'image']
-DATA_HEADER_QUESTION = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
-QUESTION_HEADER_TITLES = ['ID', 'Submission Time', 'Viewed', 'Title', 'Question']
-
 
 @connection.connection_handler
 def read_all_questions(cursor):
@@ -33,14 +29,6 @@ def get_answer_by_question_id(cursor, id):
     cursor.execute(query, {'id': id})
     answer_by_question_id=cursor.fetchall()
     return answer_by_question_id
-
-
-def write_question(question):
-    return connection.save_question(question, DATA_HEADER_QUESTION)
-
-
-def read_all_answers():
-    return connection.get_all_answers()
 
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
