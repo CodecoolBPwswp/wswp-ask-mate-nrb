@@ -30,6 +30,7 @@ def get_answer_by_question_id(cursor, id):
     answer_by_question_id=cursor.fetchall()
     return answer_by_question_id
 
+
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
     timestamp = util.get_timestamp()
@@ -42,3 +43,19 @@ def add_answer_by_question_id(cursor, new_answer):
             VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
             """
     cursor.execute(query, new_answer)
+
+@connection.connection_handler
+def search_by_words(cursor, search_words):
+    search_words_dict = {}
+    condition_list = []
+    query = 'SELECT * FROM question WHERE '
+    for index in range(len(search_words)):
+        condition = '(title ILIKE %(phrase' + str(index) + ')s OR message ILIKE %(phrase' + str(index) + ')s)'
+        search_words_dict['phrase' + str(index)] = new_answer[index]
+        condition_list.append(condition)
+
+    query += ' AND '.join(condition_list)
+
+    cursor.execute(query, search_words_dict)
+
+    return cursor.fetchall()
