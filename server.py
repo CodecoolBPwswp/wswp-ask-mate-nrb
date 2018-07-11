@@ -65,14 +65,14 @@ def saving_add_question():
         return redirect('/question/{}'.format(id))
 
 
-@app.route('/search?q=<search phrase>', methods='GET')
+@app.route('/list', methods=['GET'])
 def search():
     search_phrase = request.form["search"]
     search_words = search_phrase.split(' ')
 
     result_search = data_manager.search_by_words(search_words)
 
-    return
+    return redirect('/search?q=<{}>'.format(search_phrase))
 
 
 
