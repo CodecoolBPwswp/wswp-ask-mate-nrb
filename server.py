@@ -75,16 +75,19 @@ def display_answer_by_id(answer_id):
 
     return render_template('update_answer.html', answer=answer)
 
-#@app.route('/answer/<answere_id>/edit', methods=['POST'])
-#def update_answer_by_id(answer_id):
+@app.route('/answer/<answer_id>/edit', methods=['POST'])
+def update_answer_by_id(answer_id):
+    if request.method == 'POST':
 
-    #submission_time = util.get_timestamp()
-    #answer = {'submission_time': submission_time, }
+        edited_message = request.form['message']
+        edited_image =request.form['image']
+        submission_time = util.get_timestamp()
+        edited_answer = {'submission_time': submission_time, 'message':edited_message, 'image': edited_image, 'id': answer_id}
+        data_manager.edit_answer(edited_answer)
 
+        question_id =request.form['question_id']
 
-    #return render_template('/update_answer.html')
-
-
+        return redirect(url_for('display_question_by_id', question_id=question_id))
 
 
 

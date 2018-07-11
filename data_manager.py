@@ -83,9 +83,16 @@ def read_the_last_five_question(cursor):
 @connection.connection_handler
 def get_answer_by_id(cursor, answer_id):
 
-    query_answer = """SELECT message, image  FROM answer
+    query_answer = """SELECT message, image, id, question_id FROM answer
                 WHERE id= %(id)s"""
     cursor.execute(query_answer, {'id': answer_id})
     answer_by_id= cursor.fetchall()
 
     return answer_by_id
+
+@connection.connection_handler
+def edit_answer(cursor, edited_answer):
+    query = """ UPDATE answer
+                SET submission_time= %(submission_time)s, message= %(message)s, image=%(image)s
+                WHERE id= %(id)s"""
+    cursor.execute(query, edited_answer )
