@@ -3,8 +3,9 @@ h1 {
 }
 
 body {
-    background-color: #008e9d;
-    color: white;
+    background-image: url("https://orig00.deviantart.net/8dfa/f/2011/345/d/7/grey_minimal_by_omer_ogd-d4iuiyz.jpg") ;
+    color: #FEDC56;
+
 }
 
 table, th, td {
@@ -17,10 +18,40 @@ th, td {
     padding: 15px;
 }
 
-#add_question {
+/*#add_question {
     -webkit-appearance: button;
     appearance: button;
-}
+}*/
 table {
     width: 100%;
+}
+a {
+    color: #008e9d;
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.link_button {
+    /*color: white;*/
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+    text-align: center;
+
+    border: solid 2px;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-underline-mode: none;
+}
+
+.link_button:hover {
+    background-color: #FEDC56;
+    color: black;
+    transition-duration: 200ms;
+    border-color: #FEDC56;
 }

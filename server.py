@@ -10,11 +10,14 @@ app = Flask(__name__)
 
 
 @app.route('/')
-@app.route('/list')
 def index():
-    all_questions = data_manager.read_all_questions()
-    print(all_questions)
-    return render_template('list.html', all_questions=all_questions)
+    last_five_question = data_manager.read_the_last_five_question()
+    return render_template('index.html', last_five_question=last_five_question)
+
+@app.route('/list')
+def all_question():
+    all_question = data_manager.read_all_questions()
+    return render_template('all_question.html', all_question=all_question)
 
 
 @app.route('/question/<question_id>')
