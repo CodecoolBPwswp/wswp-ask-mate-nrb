@@ -41,7 +41,7 @@ def adding_answer(question_id):
     message = request.form['message']
     image = request.form['image_path']
 
-    new_answer = {'vote_number':vote_number,'question_id':question_id,'message':message, 'image': image}
+    new_answer = {'question_id':question_id,'message':message, 'image': image}
 
     data_manager.add_answer_by_question_id(new_answer)
 

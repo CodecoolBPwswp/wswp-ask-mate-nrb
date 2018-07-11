@@ -1,4 +1,5 @@
 import connection
+import util
 
 DATA_HEADER_ANSWER = ['id' ,'submission_time','vote_number','question_id','message', 'image']
 DATA_HEADER_QUESTION = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
@@ -43,8 +44,10 @@ def read_all_answers():
 
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
-
+    timestamp = util.get_timestamp()
+    new_answer['timestamp'] = timestamp
     new_answer['vote'] = 0
+
 
     query = """
             INSERT INTO answer (vote_number, question_id, message, image)
