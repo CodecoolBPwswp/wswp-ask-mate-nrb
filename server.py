@@ -37,7 +37,6 @@ def add_answer(question_id):
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
 def adding_answer(question_id):
 
-    vote_number= '0'
     question_id = question_id
     message = request.form['message']
     image = request.form['image_path']
