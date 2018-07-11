@@ -69,3 +69,14 @@ def add_answer_by_question_id(cursor, new_answer):
             VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
             """
     cursor.execute(query, new_answer)
+
+
+@connection.connection_handler
+def get_answer_by_id(cursor, answer_id):
+
+    query_answer = """SELECT message, image  FROM answer
+                WHERE id= %(id)s"""
+    cursor.execute(query_answer, {'id': answer_id})
+    answer_by_id= cursor.fetchall()
+
+    return answer_by_id

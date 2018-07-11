@@ -69,7 +69,7 @@
         <tr>
             {% for answer in answers_by_question_id %}
                 <tr>
-                    <td>{{ answer.id }}</td>
+                    <td><a href=/answer/{{answer.id }}/edit>{{ answer.id }}</td>
                     <td>{{ answer.submission_time }}</td>
                     <td>{{ answer.vote_number }}</td>
                     <td>{{ answer.message }} </td>

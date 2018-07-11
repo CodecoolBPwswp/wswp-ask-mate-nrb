@@ -66,6 +66,23 @@ def saving_add_question():
         ID = data_manager.get_question_id(title)
         return redirect('/question/{}'.format(ID[0]['id']))
 
+@app.route('/answer/<answer_id>/edit')
+def display_answer_by_id(answer_id):
+    answer= data_manager.get_answer_by_id(answer_id)
+
+    return render_template('update_answer.html', answer=answer)
+
+#@app.route('/answer/<answere_id>/edit', methods=['POST'])
+#def update_answer_by_id(answer_id):
+
+    #submission_time = util.get_timestamp()
+    #answer = {'submission_time': submission_time, }
+
+
+    #return render_template('/update_answer.html')
+
+
+
 
 
 if __name__ == '__main__':
