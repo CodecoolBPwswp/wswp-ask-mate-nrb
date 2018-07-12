@@ -96,3 +96,11 @@ def edit_answer(cursor, edited_answer):
                 SET submission_time= %(submission_time)s, message= %(message)s, image=%(image)s
                 WHERE id= %(id)s"""
     cursor.execute(query, edited_answer )
+
+@connection.connection_handler
+def sort_question(cursor, column, order):
+    query = """SELECT * FROM question
+            ORDER BY %(column)s, %(order)s"""
+    cursor.execute(query, {'column': column, 'order': order)
+    new_order= cursor.fetchall()
+    return new_order

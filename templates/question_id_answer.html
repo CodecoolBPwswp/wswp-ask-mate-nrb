@@ -35,8 +35,8 @@
 
      {% if not new_answer %}
          <a href='/question/{{ question_by_id.id }}/new-answer' class="link_button">Add New Answer</a>
-     {% endif %}
 
+    {% endif %}
 
      {%  if new_answer %}
          <form action='/question/{{ question_by_id.id }}/new-answer' method='POST'>
@@ -47,10 +47,23 @@
              <textarea id="image_path" name="image_path" rows="2" cols="80" ></textarea><br>
 
             <input type="submit" class="link_button" value="Submit">
+         <a href='/question/{{ question_by_id.id }}' class="link_button">Back To Question</a>
          </form>
      {% endif %}
+    <br>
+    <br>
+    <form action="/question/{{ question_by_id.id }}" method="POST">
+            <label for="sort">Sort by:</label> <br>
+            <select name="sort" class="link_button">
+                <option value="submission_time" >Descending Date</option>
+                <option value="submission_time" >Ascending Date</option>
+                <option value="vote_number" >Descending Vote</option>
+                <option value="vote_number" >Ascending Vote</option>
+                <option value="view_number" >Descending View</option>
+                <option value="view_number" >Ascending View</option>
 
-
+            </select><br>
+    </form>
     <br><br>
      <table>
         <tr>
