@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All question</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
     <h1>All question</h1>
 
     <form action="/list/" method="GET">
@@ -47,5 +42,4 @@
             {% endfor %}
         </table>
         <br><a href='/' class="link_button">Home</a>
-</body>
-</html>
+{% endblock %}
