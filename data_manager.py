@@ -64,9 +64,6 @@ def add_answer_by_question_id(cursor, new_answer):
     new_answer['submission_time'] = submission_time
     new_answer['vote_number'] = 0
     timestamp = util.get_timestamp()
-    new_answer['timestamp'] = timestamp
-    new_answer['vote'] = 0
-
 
     query = """
             INSERT INTO answer (submission_time, vote_number, question_id, message, image)
