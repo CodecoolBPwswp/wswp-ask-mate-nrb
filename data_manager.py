@@ -119,11 +119,10 @@ def edit_answer(cursor, edited_answer):
     cursor.execute(query, edited_answer )
 
 @connection.connection_handler
-def sort_question(cursor, column, order):
-    column= column.strip('')
-    order= order.strip('')
+def sort_question(cursor, order_by):
+
     query = """SELECT * FROM question
-            ORDER BY %(column)s %(order)s"""
-    cursor.execute(query, {'column': column, 'order': order})
+            ORDER BY {} {}""".format(order_by['column'], order_by['order'], order_by)
+    cursor.execute(query)
     new_order= cursor.fetchall()
     return new_order

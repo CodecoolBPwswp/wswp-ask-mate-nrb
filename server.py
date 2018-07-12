@@ -23,11 +23,11 @@ def all_question():
 def sort_question():
     if request.method == 'GET':
 
-        column = request.args.get('column','submission_time')
-        order = request.args.get('order', 'DESC')
-    sort_all_question = data_manager.sort_question(column, order)
-    return redirect(url_for('all_question', all_question=sort_all_question))
-    #return render_template('all_question.html', all_question=sort_all_question)
+        order_by= {'column':request.args.get('column','submission_time'), 'order':request.args.get('order', 'DESC')}
+
+        sort_all_question = data_manager.sort_question(order_by)
+
+    return render_template('all_question.html', all_question=sort_all_question)
 
 @app.route('/question/<question_id>')
 def display_question_by_id(question_id):
