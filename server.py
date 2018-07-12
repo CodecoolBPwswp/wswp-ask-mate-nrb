@@ -58,11 +58,10 @@ def add_question():
 def saving_add_question():
     if request.method == 'POST':
 
-        submission_time= util.get_timestamp()
         title = request.form["title"]
         message = request.form["message" ]
 
-        question = {'submission_time': submission_time, 'title': title, 'message': message, 'image': ''}
+        question = {'title': title, 'message': message, 'image': ''}
         data_manager.write_question(question)
         ID = data_manager.get_question_id(title)
         return redirect('/question/{}'.format(ID[0]['id']))
@@ -88,16 +87,15 @@ def update_answer_by_id(answer_id):
         return redirect(url_for('display_question_by_id', question_id=question_id))
 
 
-@app.route('/list', methods=['GET'])
+@app.route('/search', methods=['GET'])
 def search():
     if request.method == 'GET':
-        search_phrase = request.form["search"]
+        search_phrase = request.args.get("search", '')
         search_words = search_phrase.split(' ')
 
         result_search = data_manager.search_by_words(search_words)
 
-        return redirect('/search?q=<{}>'.format(search_phrase), result_search)
-
+        return render_template('results_search.html', result_search=result_search)
 
 
 
