@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Question</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% extends "layout.html" %}
 
-</head>
-<body>
+{% block content %}
+
     <h1>{{ question_by_id.title }}</h1><br/>
      <table>
         <tr>
@@ -73,7 +68,4 @@
             {%  endfor %}
      </table>
 
-
-
-</body>
-</html>
+{% endblock %}
