@@ -35,8 +35,8 @@
 
      {% if not new_answer %}
          <a href='/question/{{ question_by_id.id }}/new-answer' class="link_button">Add New Answer</a>
-     {% endif %}
 
+    {% endif %}
 
      {%  if new_answer %}
          <form action='/question/{{ question_by_id.id }}/new-answer' method='POST'>
@@ -47,11 +47,11 @@
              <textarea id="image_path" name="image_path" rows="2" cols="80" ></textarea><br>
 
             <input type="submit" class="link_button" value="Submit">
+         <a href='/question/{{ question_by_id.id }}' class="link_button">Back To Question</a>
          </form>
      {% endif %}
-
-
-    <br><br>
+    <br>
+    <br><br><br>
      <table>
         <tr>
             <th>Id</th>
@@ -64,10 +64,10 @@
         <tr>
             {% for answer in answers_by_question_id %}
                 <tr>
-                    <td><a href=/answer/{{answer.id }}/edit>{{ answer.id }}</td>
+                    <td>{{ answer.id }}</td>
                     <td>{{ answer.submission_time }}</td>
                     <td>{{ answer.vote_number }}</td>
-                    <td>{{ answer.message }} </td>
+                    <td><a href=/answer/{{ answer.id}}/edit class="link_button">{{ answer.message }}</td>
                     <td>{{ answer.image }} </td>
                 </tr>
             {%  endfor %}

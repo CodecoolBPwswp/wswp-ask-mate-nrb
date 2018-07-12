@@ -7,6 +7,19 @@
 </head>
 <body>
     <h1>All question</h1>
+
+    <form action="/" method="GET">
+        <label for="sort">Sort by:</label> <br>
+        <select name="sort" class="link_button">
+            <option value="submission_time" >Descending Date</option>
+            <option value="submission_time" >Ascending Date</option>
+            <option value="vote_number" >Descending Vote</option>
+            <option value="vote_number" >Ascending Vote</option>
+            <option value="view_number" >Descending View</option>
+            <option value="view_number" >Ascending View</option>
+
+        </select><br>
+    </form>
     <table>
             <tr>
                 <th>ID</th>
