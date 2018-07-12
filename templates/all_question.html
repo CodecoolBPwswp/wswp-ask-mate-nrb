@@ -8,18 +8,22 @@
 <body>
     <h1>All question</h1>
 
-    <form action="/" method="GET">
-        <label for="sort">Sort by:</label> <br>
-        <select name="sort" class="link_button">
-            <option value="submission_time" >Descending Date</option>
-            <option value="submission_time" >Ascending Date</option>
-            <option value="vote_number" >Descending Vote</option>
-            <option value="vote_number" >Ascending Vote</option>
-            <option value="view_number" >Descending View</option>
-            <option value="view_number" >Ascending View</option>
+    <form action="/list/" method="GET">
+        <label for="column">Sort by:</label> <br>
+        <select name="column" class="link_button">
+            <option value="submission_time" >Date</option>
+            <option value="vote_number" >Vote</option>
+            <option value="view_number" >View</option>
 
-        </select><br>
-    </form>
+        </select>
+
+        <select name="order" class="link_button">
+            <option value="DESC" >Descending</option>
+            <option value="ASC" >Ascending</option>
+        </select>
+            <label for="submit_button"></label>
+            <input id = "submit_button" type="submit" value= "Sort" ></button><br>
+    </form><br>
     <table>
             <tr>
                 <th>ID</th>
