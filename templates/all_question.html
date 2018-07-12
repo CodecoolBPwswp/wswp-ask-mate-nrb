@@ -35,11 +35,10 @@
                     <td>{{ question.submission_time }}</td>
                     <td>{{ question.view_number }}</td>
                     <td>{{ question.vote_number }}</td>
-                    <td><a href="/question/{{ question.id }}" class="link_button">{{ question.title }}</a></td>
+                    <td><a href="/question/{{ question.id }}">{{ question.title }}</a></td>
                     <td>{{ question.message }}</td>
                     <td>{{ question.image }}</td>
                 </tr>
             {% endfor %}
         </table>
-        <br><a href='/' class="link_button">Home</a>
 {% endblock %}

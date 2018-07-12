@@ -18,7 +18,7 @@
             <th>Submission Time</th>
             <th>View Number</th>
             <th>Vote Number</th>
-            <th>Title</th>
+            <th width="150">Title</th>
             <th>Message</th>
             <th>Image</th>
         </tr>
@@ -28,7 +28,7 @@
                 <td>{{ question.submission_time }}</td>
                 <td>{{ question.view_number }}</td>
                 <td>{{ question.vote_number }}</td>
-                <td><a href="/question/{{ question.id }}" class="link_button">{{ question.title }}</a></td>
+                <td width="150" ><a href="/question/{{ question.id }}">{{ question.title }}</a></td>
                 <td>{{ question.message }}</td>
                 <td>{{ question.image }}</td>
             </tr>

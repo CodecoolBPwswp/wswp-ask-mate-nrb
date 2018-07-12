@@ -104,7 +104,7 @@ def search():
 
         result_search = data_manager.search_by_words(search_words)
 
-        return render_template('results_search.html', result_search=result_search)
+        return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
 
 

@@ -56,6 +56,11 @@ a:visited {
     border-color: #FEDC56;
 }
 
-.footer_duma {
-    font: all-petite-caps, 10px;
+.footer_class {
+    font: all-petite-caps, 8px;
+    text-align: right;
+}
+table a {
+    border: none;
+    font-size: 14px;
 }
