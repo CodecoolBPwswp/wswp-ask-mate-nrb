@@ -67,6 +67,26 @@ def saving_add_question():
         ID = data_manager.get_question_id(title)
         return redirect('/question/{}'.format(ID[0]['id']))
 
+@app.route('/answer/<answer_id>/edit')
+def display_answer_by_id(answer_id):
+    answer= data_manager.get_answer_by_id(answer_id)
+
+    return render_template('update_answer.html', answer=answer)
+
+@app.route('/answer/<answer_id>/edit', methods=['POST'])
+def update_answer_by_id(answer_id):
+    if request.method == 'POST':
+
+        edited_message = request.form['message']
+        edited_image =request.form['image']
+        submission_time = util.get_timestamp()
+        edited_answer = {'submission_time': submission_time, 'message':edited_message, 'image': edited_image, 'id': answer_id}
+        data_manager.edit_answer(edited_answer)
+
+        question_id =request.form['question_id']
+
+        return redirect(url_for('display_question_by_id', question_id=question_id))
+
 
 @app.route('/list', methods=['GET'])
 def search():
