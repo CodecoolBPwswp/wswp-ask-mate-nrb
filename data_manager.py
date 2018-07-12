@@ -1,8 +1,5 @@
 import connection
-
-DATA_HEADER_ANSWER = ['id' ,'submission_time','vote_number','question_id','message', 'image']
-DATA_HEADER_QUESTION = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
-QUESTION_HEADER_TITLES = ['ID', 'Submission Time', 'Viewed', 'Title', 'Question']
+import util
 
 
 @connection.connection_handler
@@ -33,6 +30,7 @@ def get_answer_by_question_id(cursor, id):
     answer_by_question_id=cursor.fetchall()
     return answer_by_question_id
 
+
 @connection.connection_handler
 def write_question(cursor, question):
     question['vote_number'] = 0
@@ -42,6 +40,7 @@ def write_question(cursor, question):
                VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s)
                """
     cursor.execute(query, question)
+
 
 @connection.connection_handler
 def get_question_id(cursor, title):
@@ -61,14 +60,34 @@ def read_all_answers():
 
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
-
-    new_answer['vote'] = 0
+    submission_time = util.get_timestamp()
+    new_answer['submission_time'] = submission_time
+    new_answer['vote_number'] = 0
+    timestamp = util.get_timestamp()
 
     query = """
-            INSERT INTO answer (vote_number, question_id, message, image)
-            VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
+            INSERT INTO answer (submission_time, vote_number, question_id, message, image)
+            VALUES (%(submission_time)s,%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
             """
     cursor.execute(query, new_answer)
+
+
+@connection.connection_handler
+def search_by_words(cursor, search_words):
+    search_words_dict = {}
+    condition_list = []
+    query = 'SELECT * FROM question WHERE '
+    for index in range(len(search_words)):
+        condition = '(title ILIKE %(phrase' + str(index) + ')s OR message ILIKE %(phrase' + str(index) + ')s)'
+        search_words_dict['phrase' + str(index)] = new_answer[index]
+        condition_list.append(condition)
+
+    query += ' AND '.join(condition_list)
+
+    cursor.execute(query, search_words_dict)
+
+    return cursor.fetchall()
+
 
 @connection.connection_handler
 def read_the_last_five_question(cursor):
