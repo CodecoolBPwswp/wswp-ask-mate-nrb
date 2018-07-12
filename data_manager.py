@@ -35,6 +35,8 @@ def get_answer_by_question_id(cursor, id):
 def write_question(cursor, question):
     question['vote_number'] = 0
     question['view_number'] = 0
+    question['submission_time'] = util.get_timestamp()
+
     query = """
                INSERT INTO question(submission_time, view_number, vote_number, title, message, image)
                VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s)
@@ -79,14 +81,14 @@ def search_by_words(cursor, search_words):
     query = 'SELECT * FROM question WHERE '
     for index in range(len(search_words)):
         condition = '(title ILIKE %(phrase' + str(index) + ')s OR message ILIKE %(phrase' + str(index) + ')s)'
-        search_words_dict['phrase' + str(index)] = new_answer[index]
+        search_words_dict['phrase' + str(index)] = '%' + search_words[index] + '%'
         condition_list.append(condition)
 
     query += ' AND '.join(condition_list)
 
     cursor.execute(query, search_words_dict)
-
-    return cursor.fetchall()
+    results = cursor.fetchall()
+    return results
 
 
 @connection.connection_handler
