@@ -19,6 +19,15 @@ def all_question():
     all_question = data_manager.read_all_questions()
     return render_template('all_question.html', all_question=all_question)
 
+@app.route('/list/', methods=['GET'])
+def sort_question():
+    if request.method == 'GET':
+
+        column = request.args.get('column','submission_time')
+        order = request.args.get('order', 'DESC')
+    sort_all_question = data_manager.sort_question(column, order)
+    return redirect(url_for('all_question', all_question=sort_all_question))
+    #return render_template('all_question.html', all_question=sort_all_question)
 
 @app.route('/question/<question_id>')
 def display_question_by_id(question_id):
@@ -54,7 +63,7 @@ def add_question():
     return render_template('/add-question.html')
 
 
-@app.route('/add-question', methods=['POST']) #?????????????????,
+@app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
 
@@ -96,7 +105,6 @@ def search():
         result_search = data_manager.search_by_words(search_words)
 
         return render_template('results_search.html', result_search=result_search)
-
 
 
 
