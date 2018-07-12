@@ -32,6 +32,32 @@ def get_answer_by_question_id(cursor, id):
 
 
 @connection.connection_handler
+def write_question(cursor, question):
+    question['vote_number'] = 0
+    question['view_number'] = 0
+    query = """
+               INSERT INTO question(submission_time, view_number, vote_number, title, message, image)
+               VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s)
+               """
+    cursor.execute(query, question)
+
+@connection.connection_handler
+def get_question_id(cursor, title):
+    queryID ="""
+        SELECT id FROM question
+        WHERE title = %(title)s"""
+    cursor.execute(queryID, {'title': title})
+    question_id = cursor.fetchall()
+    return question_id
+
+
+
+
+
+def read_all_answers():
+    return connection.get_all_answers()
+
+@connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
     timestamp = util.get_timestamp()
     new_answer['timestamp'] = timestamp
@@ -59,3 +85,11 @@ def search_by_words(cursor, search_words):
     cursor.execute(query, search_words_dict)
 
     return cursor.fetchall()
+@connection.connection_handler
+def read_the_last_five_question(cursor):
+    query = """
+            SELECT * FROM question
+            LIMIT 5"""
+    cursor.execute(query)
+    last_five_question=cursor.fetchall()
+    return last_five_question

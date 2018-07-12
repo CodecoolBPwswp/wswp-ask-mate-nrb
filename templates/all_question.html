@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <h1>All question</h1>
+    <table>
+            <tr>
+                <th>ID</th>
+                <th>Submission Time</th>
+                <th>View Number</th>
+                <th>Vote Number</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Image</th>
+            </tr>
+            {% for question in all_question %}
+                <tr>
+                    <td>{{ question.id }}</td>
+                    <td>{{ question.submission_time }}</td>
+                    <td>{{ question.view_number }}</td>
+                    <td>{{ question.vote_number }}</td>
+                    <td><a href="/question/{{ question.id }}" class="link_button">{{ question.title }}</a></td>
+                    <td>{{ question.message }}</td>
+                    <td>{{ question.image }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br><a href='/' class="link_button"><button>Home</button></a>
+</body>
+</html>
