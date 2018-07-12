@@ -41,6 +41,7 @@ def write_question(cursor, question):
                """
     cursor.execute(query, question)
 
+
 @connection.connection_handler
 def get_question_id(cursor, title):
     queryID ="""
@@ -59,16 +60,20 @@ def read_all_answers():
 
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
+    submission_time = util.get_timestamp()
+    new_answer['submission_time'] = submission_time
+    new_answer['vote_number'] = 0
     timestamp = util.get_timestamp()
     new_answer['timestamp'] = timestamp
     new_answer['vote'] = 0
 
 
     query = """
-            INSERT INTO answer (vote_number, question_id, message, image)
-            VALUES (%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
+            INSERT INTO answer (submission_time, vote_number, question_id, message, image)
+            VALUES (%(submission_time)s,%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
             """
     cursor.execute(query, new_answer)
+
 
 @connection.connection_handler
 def search_by_words(cursor, search_words):
@@ -85,6 +90,8 @@ def search_by_words(cursor, search_words):
     cursor.execute(query, search_words_dict)
 
     return cursor.fetchall()
+
+
 @connection.connection_handler
 def read_the_last_five_question(cursor):
     query = """

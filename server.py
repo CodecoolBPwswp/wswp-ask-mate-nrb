@@ -54,7 +54,7 @@ def add_question():
     return render_template('/add-question.html')
 
 
-@app.route('/add-question', methods=['POST'])
+@app.route('/add-question', methods=['POST']) #?????????????????,
 def saving_add_question():
     if request.method == 'POST':
 
@@ -62,25 +62,24 @@ def saving_add_question():
         title = request.form["title"]
         message = request.form["message" ]
 
-        row ={'id':id, 'submission_time': submission_time, 'view_number': view_number,'vote_number': vote_number,'title':title, 'message': message,'image':''}
-        data_manager.write_question(row)
-        return redirect('/question/{}'.format(id))
+        question = {'submission_time': submission_time, 'title': title, 'message': message, 'image': ''}
+        data_manager.write_question(question)
+        ID = data_manager.get_question_id(title)
+        return redirect('/question/{}'.format(ID[0]['id']))
 
 
 @app.route('/list', methods=['GET'])
 def search():
-    search_phrase = request.form["search"]
-    search_words = search_phrase.split(' ')
+    if request.method == 'GET':
+        search_phrase = request.form["search"]
+        search_words = search_phrase.split(' ')
 
-    result_search = data_manager.search_by_words(search_words)
+        result_search = data_manager.search_by_words(search_words)
 
-    return redirect('/search?q=<{}>'.format(search_phrase))
+        return redirect('/search?q=<{}>'.format(search_phrase), result_search)
 
 
-        question={'submission_time': submission_time,'title':title, 'message': message,'image':''}
-        data_manager.write_question(question)
-        ID = data_manager.get_question_id(title)
-        return redirect('/question/{}'.format(ID[0]['id']))
+
 
 
 
