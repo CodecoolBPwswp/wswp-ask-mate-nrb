@@ -51,20 +51,7 @@
          </form>
      {% endif %}
     <br>
-    <br>
-    <form action="/question/{{ question_by_id.id }}" method="POST">
-            <label for="sort">Sort by:</label> <br>
-            <select name="sort" class="link_button">
-                <option value="submission_time" >Descending Date</option>
-                <option value="submission_time" >Ascending Date</option>
-                <option value="vote_number" >Descending Vote</option>
-                <option value="vote_number" >Ascending Vote</option>
-                <option value="view_number" >Descending View</option>
-                <option value="view_number" >Ascending View</option>
-
-            </select><br>
-    </form>
-    <br><br>
+    <br><br><br>
      <table>
         <tr>
             <th>Id</th>
@@ -77,10 +64,10 @@
         <tr>
             {% for answer in answers_by_question_id %}
                 <tr>
-                    <td><a href=/answer/{{answer.id }}/edit>{{ answer.id }}</td>
+                    <td>{{ answer.id }}</td>
                     <td>{{ answer.submission_time }}</td>
                     <td>{{ answer.vote_number }}</td>
-                    <td>{{ answer.message }} </td>
+                    <td><a href=/answer/{{ answer.id}}/edit class="link_button">{{ answer.message }}</td>
                     <td>{{ answer.image }} </td>
                 </tr>
             {%  endfor %}

@@ -120,6 +120,6 @@ def edit_answer(cursor, edited_answer):
 def sort_question(cursor, column, order):
     query = """SELECT * FROM question
             ORDER BY %(column)s, %(order)s"""
-    cursor.execute(query, {'column': column, 'order': order)
+    cursor.execute(query, {'column': column, 'order': order})
     new_order= cursor.fetchall()
     return new_order
