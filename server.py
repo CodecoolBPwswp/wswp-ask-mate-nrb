@@ -43,9 +43,7 @@ def adding_answer(question_id):
     question_id = question_id
     message = request.form['message']
     image = request.form['image_path']
-
-    new_answer = {'vote_number':vote_number,'question_id':question_id,'message':message, 'image': image}
-
+    new_answer = {'question_id':question_id,'message':message, 'image': image}
     data_manager.add_answer_by_question_id(new_answer)
 
     return redirect('/question/{}'.format(question_id))
@@ -56,7 +54,7 @@ def add_question():
     return render_template('/add-question.html')
 
 
-@app.route('/add-question', methods=['POST'])
+@app.route('/add-question', methods=['POST']) #?????????????????,
 def saving_add_question():
     if request.method == 'POST':
 
@@ -64,10 +62,44 @@ def saving_add_question():
         title = request.form["title"]
         message = request.form["message" ]
 
-        question={'submission_time': submission_time,'title':title, 'message': message,'image':''}
+        question = {'submission_time': submission_time, 'title': title, 'message': message, 'image': ''}
         data_manager.write_question(question)
         ID = data_manager.get_question_id(title)
         return redirect('/question/{}'.format(ID[0]['id']))
+
+@app.route('/answer/<answer_id>/edit')
+def display_answer_by_id(answer_id):
+    answer= data_manager.get_answer_by_id(answer_id)
+
+    return render_template('update_answer.html', answer=answer)
+
+@app.route('/answer/<answer_id>/edit', methods=['POST'])
+def update_answer_by_id(answer_id):
+    if request.method == 'POST':
+
+        edited_message = request.form['message']
+        edited_image =request.form['image']
+        submission_time = util.get_timestamp()
+        edited_answer = {'submission_time': submission_time, 'message':edited_message, 'image': edited_image, 'id': answer_id}
+        data_manager.edit_answer(edited_answer)
+
+        question_id =request.form['question_id']
+
+        return redirect(url_for('display_question_by_id', question_id=question_id))
+
+
+@app.route('/list', methods=['GET'])
+def search():
+    if request.method == 'GET':
+        search_phrase = request.form["search"]
+        search_words = search_phrase.split(' ')
+
+        result_search = data_manager.search_by_words(search_words)
+
+        return redirect('/search?q=<{}>'.format(search_phrase), result_search)
+
+
+
 
 
 
