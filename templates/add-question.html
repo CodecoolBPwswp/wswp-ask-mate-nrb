@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Ask question</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    </head>
-    <body>
+{% extends "layout.html" %}
 
-        <h1>Ask new question</h1>
+{% block content %}
 
-        <form action="/add-question" method='POST'>
+    <h1>Ask new question</h1>
 
-            <label for="title"> Question:</label> <br>
-            <textarea id="title" name="title" rows="1" cols="40" minlength=5  maxlength=500 required></textarea><br>
+    <form action="/add-question" method='POST'>
 
-            <label for="message">Message:</label> <br>
-            <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
+        <label for="title"> Question:</label> <br>
+        <textarea id="title" name="title" rows="1" cols="40" minlength=5  maxlength=500 required></textarea><br>
 
-            <label for="submit_button"></label> <br>
-            <input id = "submit_button" type="submit" value= "Add New Question"></button><br>
+        <label for="message">Message:</label> <br>
+        <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
 
-        </form><br>
-        <a href='/list' class="link_button"><button>Back To The List</button></a>
+        <label for="submit_button"></label> <br>
+        <input id = "submit_button" type="submit" value= "Add New Question"></button><br>
 
-    </body>
-</html>
+    </form><br>
+    <a href='/list' class="link_button"><button>Back To The List</button></a>
+
+ {% endblock %}
