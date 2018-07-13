@@ -95,6 +95,7 @@ def search_by_words(cursor, search_words):
 def read_the_last_five_question(cursor):
     query = """
             SELECT * FROM question
+            ORDER BY submission_time DESC 
             LIMIT 5"""
     cursor.execute(query)
     last_five_question=cursor.fetchall()
