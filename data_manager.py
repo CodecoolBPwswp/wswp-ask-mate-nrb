@@ -54,12 +54,6 @@ def get_question_id(cursor, title):
     return question_id
 
 
-
-
-
-def read_all_answers():
-    return connection.get_all_answers()
-
 @connection.connection_handler
 def add_answer_by_question_id(cursor, new_answer):
     submission_time = util.get_timestamp()

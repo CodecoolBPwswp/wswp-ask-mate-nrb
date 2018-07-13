@@ -1,4 +1,4 @@
-import time, connection
+import time
 from datetime import datetime
 
 def get_timestamp():
@@ -6,11 +6,6 @@ def get_timestamp():
     submission_time = datetime.fromtimestamp(time_stamp).strftime("%Y-%m-%d %H:%M:%S")
 
     return submission_time
-
-
-
-
-
 
 
 def get_vote_num():

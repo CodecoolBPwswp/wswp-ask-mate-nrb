@@ -1,29 +1,3 @@
-import csv
-import os
-
-#DATA_FILE_PATH = os.getenv('DATA_FILE_PATH') if 'DATA_FILE_PATH' in os.environ else 'data.csv'
-
-def get_all_answers():
-
-    input_file = csv.DictReader(open("sample_data/answer.csv", "r+", newline=''), fieldnames=None, restkey=None, restval='0')
-    all_answers = [row for row in input_file]
-    return all_answers
-
-
-
-def save_question(question, fieldnames):
-    with open("sample_data/question.csv", 'a') as inFile:
-        writer = csv.DictWriter(inFile, fieldnames=fieldnames)
-        writer.writerow(question)
-
-def save_answer(answer, fieldnames):
-    with open("sample_data/answer.csv", 'a') as inFile:
-        writer = csv.DictWriter(inFile, fieldnames=fieldnames)
-        writer.writerow(answer)
-
-
-# Creates a decorator to handle the database connection/cursor opening/closing.
-# Creates the cursor with RealDictCursor, thus it returns real dictionaries, where the column names are the keys.
 import os
 import psycopg2
 import psycopg2.extras

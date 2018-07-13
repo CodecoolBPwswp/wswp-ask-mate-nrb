@@ -1,10 +1,5 @@
-from flask import Flask, request, url_for, session, render_template, redirect
-import connection
-import util
-import data_manager
+from flask import Flask, request, url_for, render_template, redirect
 import util, data_manager
-
-
 
 app = Flask(__name__)
 
@@ -55,7 +50,7 @@ def adding_answer(question_id):
     new_answer = {'question_id':question_id,'message':message, 'image': image}
     data_manager.add_answer_by_question_id(new_answer)
 
-    return redirect('/question/{}'.format(question_id))
+    return redirect(url_for('display_question_by_id', question_id=question_id))
 
 
 @app.route('/add-question')
@@ -105,7 +100,6 @@ def search():
         result_search = data_manager.search_by_words(search_words)
 
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
-
 
 
 
