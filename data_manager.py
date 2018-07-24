@@ -134,7 +134,7 @@ def sort_question(cursor, order_by):
 
 @connection.connection_handler
 def list_all_users(cursor):
-    query = """SELECT username.id, username.name, username.date
+    query = """SELECT username.id, username.name, username.submission_time
             FROM username
             """
     cursor.execute(query)
