@@ -106,6 +106,8 @@ def get_answer_by_id(cursor, answer_id):
 
     return answer_by_id
 
+
+
 @connection.connection_handler
 def edit_answer(cursor, edited_answer):
     query = """ UPDATE answer
