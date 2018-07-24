@@ -6,10 +6,10 @@
 </head>
 <div class="log">
     {% if valid==True %}
-    <form action="{{ (url_for('logout')) }}" method="POST">
+    <form action="/" method="POST">
         <h4>Logged in as {{ username }}</h4>
         <label for="submit_button"></label>
-        <input id = "submit_button" type="submit" class="link_button" value= "Logout"></button>
+        <input formaction="{{ url_for('logout') }}" id = "submit_button" type="submit" class="link_button" value= "Logout"></button>
     </form>
     {% elif valid==False %}
     <form action="{{ (url_for('login')) }}" method="POST">

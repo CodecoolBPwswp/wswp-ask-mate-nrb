@@ -104,18 +104,19 @@ def search():
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
+
         username = request.form['username']
         password = request.form['password']
         pw_hash = data_manager.get_hash(username)
-        print(pw_hash)
 
         valid = util.verify_password(password, pw_hash)
-        print(valid)
+        if valid==True:
+            session['username'] = request.form['username']
 
-        return render_template('footer.html', valid=valid)
+        return render_template('footer.html', valid=valid, username=username)
+    return redirect(url_for('index'))
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
    session.pop('username', None)
    return redirect(url_for('index'))
