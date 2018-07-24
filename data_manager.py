@@ -114,6 +114,20 @@ def edit_question(cursor, edited_question):
                         WHERE id=%(id)s""", edited_question)
 
 
+@connection.connection_handler
+def delete_answer(cursor, id):
+    cursor.execute("""DELETE FROM answer
+                        WHERE id = %(id)s""", {"id": id})
+
+
+@connection.connection_handler
+def delete_question(cursor, id):
+    cursor.execute("""DELETE FROM answer
+                        WHERE question_id = %(id)s""", {"id": id})
+    cursor.execute("""DELETE FROM question
+                        WHERE id = %(id)s""", {"id": id})
+
+
 
 @connection.connection_handler
 def edit_answer(cursor, edited_answer):

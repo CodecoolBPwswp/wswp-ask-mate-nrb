@@ -11,8 +11,11 @@
     <label>Message:</label></br>
     <textarea name="message" rows="18" cols="100" maxlength="10000">{{question_by_id.message }}</textarea></br></br>
 
-      <button type="submit">Save changes</button>
+      <button type="submit">Save changes</button><br/>
+    </form><br/>
+    <form action='/question/{{ question_by_id.id }}/delete' method='POST'>
+        <button type="submit" onclick="return confirm('Are you sure to delete this question?');">Delete question</button>
+    </form>
 
-</form>
 
 {% endblock %}

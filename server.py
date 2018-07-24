@@ -69,6 +69,19 @@ def edit_question(id):
         return render_template('edit_question.html', question_by_id=data_manager.get_question_by_id(id))
 
 
+@app.route('/answer/<id>/delete', methods=['POST'])
+def delete_answer(id):
+    data_manager.delete_answer(id)
+    question_id = request.form['question_id']
+    return redirect('/question/' + '{}'.format(question_id))
+
+
+@app.route('/question/<id>/delete', methods=['POST'])
+def delete_question(id):
+    data_manager.delete_question(id)
+    return redirect('/')
+
+
 @app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
