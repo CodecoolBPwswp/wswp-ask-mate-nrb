@@ -16,6 +16,11 @@ ALTER TABLE IF EXISTS ONLY public.question_tag DROP CONSTRAINT IF EXISTS fk_ques
 ALTER TABLE IF EXISTS ONLY public.tag DROP CONSTRAINT IF EXISTS pk_tag_id CASCADE;
 ALTER TABLE IF EXISTS ONLY public.question_tag DROP CONSTRAINT IF EXISTS fk_tag_id CASCADE;
 
+ALTER TABLE IF EXISTS ONLY public.username DROP CONSTRAINT IF EXISTS pk_user_id CASCADE;
+ALTER TABLE IF EXISTS ONLY public.question DROP CONSTRAINT IF EXISTS fk_user_id CASCADE;
+ALTER TABLE IF EXISTS ONLY public.answer DROP CONSTRAINT IF EXISTS fk_user_id CASCADE;
+
+
 DROP TABLE IF EXISTS public.question;
 DROP SEQUENCE IF EXISTS public.question_id_seq;
 CREATE TABLE question (
@@ -63,6 +68,32 @@ CREATE TABLE tag (
     id serial NOT NULL,
     name text
 );
+DROP TABLE IF EXISTS public.users;
+DROP SEQUENCE IF EXISTS public.users_id_seq;
+CREATE TABLE username(
+    id serial NOT NULL,
+    name text,
+    submission_time timestamp without time zone,
+    password_hash text
+);
+
+
+
+ALTER TABLE ONLY username
+    ADD CONSTRAINT pk_user_id PRIMARY KEY (id);
+
+
+ALTER TABLE ONLY question
+    ADD user_id INTEGER NOT NULL DEFAULT 0;
+
+ALTER TABLE ONLY question
+    ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES username(id);
+
+ALTER TABLE ONLY answer
+    ADD user_id INTEGER NOT NULL DEFAULT 0;
+
+ALTER TABLE ONLY answer
+   ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES username(id);
 
 
 ALTER TABLE ONLY answer
@@ -95,6 +126,8 @@ ALTER TABLE ONLY comment
 ALTER TABLE ONLY question_tag
     ADD CONSTRAINT fk_tag_id FOREIGN KEY (tag_id) REFERENCES tag(id);
 
+
+INSERT INTO username VALUES (1, 'Lennon','2018-07-24 09:57:00', '$2b$12$NpE.e.INpHHOXCXFG6E6/u7UanWyxLRcA354itq5vQAYdasIhO25q');
 INSERT INTO question VALUES (0, '2017-04-28 08:29:00', 29, 7, 'How to make lists in Python?', 'I am totally new to this, any hints?', NULL);
 INSERT INTO question VALUES (1, '2017-04-29 09:19:00', 15, 9, 'Wordpress loading multiple jQuery Versions', 'I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $(".myBook").booklet();
 
