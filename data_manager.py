@@ -121,3 +121,13 @@ def sort_question(cursor, order_by):
     cursor.execute(query)
     new_order= cursor.fetchall()
     return new_order
+
+
+@connection.connection_handler
+def list_all_users(cursor):
+    query = """SELECT username.id, username.name, username.date
+            FROM username
+            """
+    cursor.execute(query)
+    all_users = cursor.fetchall()
+    return all_users
