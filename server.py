@@ -101,6 +101,20 @@ def search():
 
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
+@app.route('/login', method= ['POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        pw_hash = data_manager.get_hash(username)
+
+        valid = util.verify_password(password, pw_hash)
+        css_class = 'match' if valid else 'missmatch'
+
+    #return render_template('all_question.html', all_question=all_question)
+
+
+
 
 @app.route('/registration', methods=['POST'])
 def registration():
