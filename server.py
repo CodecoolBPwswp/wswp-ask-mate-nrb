@@ -111,7 +111,8 @@ def login():
         valid = util.verify_password(password, pw_hash)
         css_class = 'match' if valid else 'missmatch'
 
-    #return render_template('all_question.html', all_question=all_question)
+        return redirect(url_for('index', css_class=css_class))
+
 
 
 
