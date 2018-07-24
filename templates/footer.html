@@ -5,12 +5,32 @@
     <title>Title</title>
 </head>
 <div class="log">
+    {% if valid==True %}
+    <form action="{{ (url_for('logout')) }}" method="POST">
+        <h4>Logged in as {{ username }}</h4>
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Logout"></button>
+    </form>
+    {% elif valid==False %}
+    <form action="{{ (url_for('login')) }}" method="POST">
+        <h4>Invalid username or password</h4>
+        <label for="username">Username</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Login"></button>
+    </form>
+    {% else %}
     <form action="{{ (url_for('login')) }}" method="POST">
         <label for="username">Username</label>
         <input type="text" name="username">
         <label for="password">Password</label>
         <input type="password" name="password">
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Login"></button>
     </form>
+    {% endif %}
 </div>
 <div>
     <br><a href='/' class="link_button">Home</a><br><br>

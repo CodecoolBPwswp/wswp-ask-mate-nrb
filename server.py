@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template, redirect
+from flask import Flask, request, url_for, render_template, redirect, session, escape
 import util, data_manager
 
 app = Flask(__name__)
@@ -101,19 +101,24 @@ def search():
 
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
-@app.route('/login', method= ['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
+        session['username'] = request.form['username']
         username = request.form['username']
         password = request.form['password']
         pw_hash = data_manager.get_hash(username)
+        print(pw_hash)
 
         valid = util.verify_password(password, pw_hash)
-        css_class = 'match' if valid else 'missmatch'
+        print(valid)
 
-        return redirect(url_for('index', css_class=css_class))
+        return render_template('footer.html', valid=valid)
 
-
+@app.route('/logout')
+def logout():
+   session.pop('username', None)
+   return redirect(url_for('index'))
 
 
 
@@ -123,6 +128,7 @@ def registration():
     pass
 
 if __name__ == '__main__':
+    app.secret_key = 'top_secret'
     app.run(
         host='0.0.0.0',
         port=8000,

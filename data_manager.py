@@ -134,9 +134,9 @@ def list_all_users(cursor):
 
 @connection.connection_handler
 def get_hash(cursor, username):
-    user['submission_time'] = util.get_timestamp()
-    cursor.execute("""SELECT username.password_hash
+    query="""SELECT password_hash
             FROM username
-            WHERE name = %(name)""", {'name': username} )
+            WHERE name = %(name)s"""
+    cursor.execute(query, {'name':username})
     hash= cursor.fetchall()
-    return hash
+    return hash[0]['password_hash']
