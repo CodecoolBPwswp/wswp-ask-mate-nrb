@@ -107,6 +107,13 @@ def get_answer_by_id(cursor, answer_id):
     return answer_by_id
 
 
+@connection.connection_handler
+def edit_question(cursor, edited_question):
+    cursor.execute("""UPDATE question
+                        SET title=%(title)s, message=%(message)s
+                        WHERE id=%(id)s""", edited_question)
+
+
 
 @connection.connection_handler
 def edit_answer(cursor, edited_answer):

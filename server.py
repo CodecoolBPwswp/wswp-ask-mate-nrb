@@ -57,6 +57,17 @@ def adding_answer(question_id):
 def add_question():
     return render_template('/add-question.html')
 
+@app.route('/question/<id>/edit', methods=['POST', 'GET'])
+def edit_question(id):
+    if request.method == 'POST':
+        edited_question = {"id": id,
+                           "title": request.form["title"],
+                           "message": request.form["message"]}
+        data_manager.edit_question(edited_question)
+        return redirect('/question/' + '{}'.format(edited_question['id']))
+    else:
+        return render_template('edit_question.html', question_by_id=data_manager.get_question_by_id(id))
+
 
 @app.route('/add-question', methods=['POST'])
 def saving_add_question():
