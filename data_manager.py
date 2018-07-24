@@ -130,4 +130,7 @@ def list_all_users(cursor):
             """
     cursor.execute(query)
     all_users = cursor.fetchall()
+
+
+
     return all_users
