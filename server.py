@@ -102,6 +102,10 @@ def search():
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
 
+@app.route('/registration', methods=['POST'])
+def registration():
+
+    pass
 
 
 if __name__ == '__main__':

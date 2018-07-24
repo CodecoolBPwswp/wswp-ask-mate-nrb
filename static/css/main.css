@@ -56,6 +56,13 @@ a:visited {
     border-color: #FEDC56;
 }
 
+.log {
+    display: inline;
+    position: fixed;
+    right: 10px;
+    top: 50px;
+}
+
 .footer_class {
     font: all-petite-caps, 8px;
     text-align: right;
