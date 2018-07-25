@@ -168,3 +168,34 @@ def add_new_user(cursor, name, password_hash):
     """
 
     cursor.execute(query, {'name':name, 'submission_time':submission_time, 'password_hash':password_hash})
+
+
+@connection.connection_handler
+def get_user_questions_by_id(cursor, user_id):
+    query = """ SELECT username.id, username.name,question.title AS title, question.message AS message
+              FROM username LEFT JOIN question ON username.id=question.user_id
+              WHERE username.id = %(user_id)s
+            """
+
+    cursor.execute(query, {'user_id':user_id})
+    questions_by_id = cursor.fetchall()
+    return questions_by_id
+
+
+@connection.connection_handler
+def get_user_answers_by_id(cursor, user_id):
+    query = """ SELECT question.id,
+                question.title AS question_title ,
+                question.message AS question_message,
+                answer.message AS answer_message
+                FROM username, answer, question
+                WHERE username.id = %(user_id)s AND answer.question_id = question.id AND username.id = answer.user_id
+            """
+
+    cursor.execute(query, {'user_id': user_id})
+    answers_by_id = cursor.fetchall()
+    return answers_by_id
+
+
+
+

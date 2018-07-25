@@ -159,6 +159,18 @@ def list_users():
     return render_template('list_users.html', users_list=users_list)
 
 
+@app.route('/user/<user_id>', methods=['POST', 'GET'])
+def list_user_questions_and_answers(user_id):
+    user_questions_by_id = data_manager.get_user_questions_by_id(user_id)
+    user_answers_by_id = data_manager.get_user_answers_by_id(user_id)
+    print(user_questions_by_id)
+    print(user_answers_by_id)
+    return render_template('user_page.html', user_questions_by_id=user_questions_by_id,
+                           user_answers_by_id=user_answers_by_id)
+
+
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
