@@ -101,20 +101,24 @@ def search():
 
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
+
 @app.route('/login', methods=['POST'])
 def login():
+
     if request.method == 'POST':
 
         username = request.form['username']
         password = request.form['password']
         pw_hash = data_manager.get_hash(username)
-
-        valid = util.verify_password(password, pw_hash)
+        if len(pw_hash) == 1:
+            password_hash = pw_hash[0]['password_hash']
+        valid = util.verify_password(password, password_hash)
         if valid==True:
             session['username'] = request.form['username']
 
-        return render_template('footer.html', valid=valid, username=username)
-    return redirect(url_for('index'))
+
+        return redirect('/')
+
 
 @app.route('/logout', methods=['POST'])
 def logout():

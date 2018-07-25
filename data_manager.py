@@ -139,5 +139,4 @@ def get_hash(cursor, username):
             WHERE name = %(name)s"""
     cursor.execute(query, {'name':username})
     hash= cursor.fetchall()
-
-    return hash[0]['password_hash']
+    return hash
