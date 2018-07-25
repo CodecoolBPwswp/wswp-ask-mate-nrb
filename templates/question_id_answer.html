@@ -21,7 +21,13 @@
              <td>{{ question_by_id.view_number }}</td>
              <td>{{ question_by_id.vote_number }}</td>
              <td>{{ question_by_id.title }}</td>
-             <td><a href=/question/{{ question_by_id.id}}/edit>{{ question_by_id.message }}</td>
+             <td>
+                 {% if session["user_id"] == question_by_id.user_id %}
+                    <a href=/question/{{ question_by_id.id}}/edit>{{ question_by_id.message }}</a>
+                 {% else %}
+                    {{ question_by_id.message }}
+                 {% endif %}
+             </td>
              <td>{{ question_by_id.image }}</td>
              <td>{{ question_by_id.name }}</td>
          </tr>
@@ -29,10 +35,11 @@
 
      <br>
      <a href='/' class="link_button">Home</a><br><br>
+    {% if session['user_id'] %}
+         {% if not new_answer %}
+             <a href='/question/{{ question_by_id.id }}/new-answer' class="link_button">Add New Answer</a>
 
-     {% if not new_answer %}
-         <a href='/question/{{ question_by_id.id }}/new-answer' class="link_button">Add New Answer</a>
-
+        {% endif %}
     {% endif %}
 
      {%  if new_answer %}
@@ -67,7 +74,13 @@
                         <!--<td>{{ answer.id }}</td>-->
                         <td>{{ answer.submission_time }}</td>
                         <td>{{ answer.vote_number }}</td>
-                        <td><a href=/answer/{{ answer.id}}/edit>{{ answer.message }}</td>
+                        <td>
+                            {% if session["user_id"] == answer.user_id %}
+                                <a href=/answer/{{ answer.id}}/edit>{{ answer.message }}</a>
+                            {% else %}
+                                {{ answer.message }}
+                            {% endif %}
+                        </td>
                         <td>{{ answer.image }} </td>
                         <td>{{ answer.name }}</td>
                     </tr>

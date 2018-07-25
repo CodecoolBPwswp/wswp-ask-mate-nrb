@@ -41,8 +41,8 @@ def write_question(cursor, question):
     question['submission_time'] = util.get_timestamp()
 
     query = """
-               INSERT INTO question(submission_time, view_number, vote_number, title, message, image)
-               VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s)
+               INSERT INTO question(submission_time, view_number, vote_number, title, message, image, user_id)
+               VALUES (%(submission_time)s,%(view_number)s,%(vote_number)s, %(title)s, %(message)s, %(image)s, %(user_id)s)
                """
     cursor.execute(query, question)
 
@@ -65,8 +65,8 @@ def add_answer_by_question_id(cursor, new_answer):
     timestamp = util.get_timestamp()
 
     query = """
-            INSERT INTO answer (submission_time, vote_number, question_id, message, image)
-            VALUES (%(submission_time)s,%(vote_number)s, %(question_id)s, %(message)s, %(image)s)
+            INSERT INTO answer (submission_time, vote_number, question_id, message, image, user_id)
+            VALUES (%(submission_time)s,%(vote_number)s, %(question_id)s, %(message)s, %(image)s, %(user_id)s)
             """
     cursor.execute(query, new_answer)
 
@@ -171,9 +171,9 @@ def add_new_user(cursor, name, password_hash):
 
 @connection.connection_handler
 def get_hash(cursor, username):
-    query="""SELECT password_hash
+    query="""SELECT *
             FROM username
             WHERE name = %(name)s"""
     cursor.execute(query, {'name':username})
-    hash= cursor.fetchall()
+    hash= cursor.fetchone()
     return hash

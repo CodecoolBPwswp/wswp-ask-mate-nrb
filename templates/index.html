@@ -5,7 +5,9 @@
     <h1>Ask Mate!</h1>
     <p><a class="link_button" href="/list_users">List Users</a></p>
     <p><a id="display_all_question" class="link_button" href="/list">See all question</a></p><br>
-    <p><a id="add_question" class="link_button" href="/add-question">Add question</a></p>
+    {% if session['user_id'] %}
+        <p><a id="add_question" class="link_button" href="/add-question">Add question</a></p>
+    {% endif %}
     <label for="search"></label>
     <form action="{{ url_for('search') }}" method="GET">
         <input type="text" id="search" name="search" >
