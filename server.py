@@ -106,18 +106,19 @@ def search():
 def login():
 
     if request.method == 'POST':
-
-        username = request.form['username']
-        password = request.form['password']
-        pw_hash = data_manager.get_hash(username)
-        if len(pw_hash) == 1:
-            password_hash = pw_hash[0]['password_hash']
-        valid = util.verify_password(password, password_hash)
-        if valid==True:
-            session['username'] = request.form['username']
-
-
-        return redirect('/')
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            pw_hash = data_manager.get_hash(username)
+            if len(pw_hash) == 1:
+                password_hash = pw_hash[0]['password_hash']
+            valid = util.verify_password(password, password_hash)
+            if valid==True:
+                session['username'] = request.form['username']
+        except:
+            invalid = 'Invalid username or password'
+            return render_template('index.html', invalid=invalid)
+    return redirect('/')
 
 
 @app.route('/logout', methods=['POST'])
@@ -125,12 +126,6 @@ def logout():
    session.pop('username', None)
    return redirect(url_for('index'))
 
-
-
-@app.route('/registration', methods=['POST'])
-def registration():
-
-    pass
 
 if __name__ == '__main__':
     app.secret_key = 'top_secret'
