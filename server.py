@@ -162,18 +162,24 @@ def list_users():
 def login():
 
     if request.method == 'POST':
+        session['message'] = None
 
-        username = request.form['username']
-        password = request.form['password']
-        pw_hash = data_manager.get_hash(username)
-        if len(pw_hash) == 1:
-            password_hash = pw_hash[0]['password_hash']
-        valid = util.verify_password(password, password_hash)
-        if valid==True:
-            session['username'] = request.form['username']
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            pw_hash = data_manager.get_hash(username)
+            if len(pw_hash) == 1:
+                password_hash = pw_hash[0]['password_hash']
+            valid = util.verify_password(password, password_hash)
+            if valid==True:
+                session['username'] = request.form['username']
+            else:
+                session['message'] = 'Invalid username or password'
+        except:
+            session['message'] = 'Invalid username or password'
 
 
-        return redirect('/')
+    return redirect('/')
 
 
 @app.route('/logout', methods=['POST'])
