@@ -22,6 +22,7 @@
             <th width="150">Title</th>
             <th>Message</th>
             <th>Image</th>
+            <th>Question by</th>
         </tr>
         {% for question in last_five_question %}
             <tr>
@@ -32,6 +33,7 @@
                 <td width="150" ><a href="/question/{{ question.id }}">{{ question.title }}</a></td>
                 <td>{{ question.message }}</td>
                 <td>{{ question.image }}</td>
+                <td>{{ question.name }}</td>
             </tr>
         {% endfor %}
     </table>

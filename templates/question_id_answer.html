@@ -12,6 +12,7 @@
             <th>Title</th>
             <th>Message</th>
             <th>Image</th>
+            <th>Question by</th>
         </tr>
 
          <tr>
@@ -22,6 +23,7 @@
              <td>{{ question_by_id.title }}</td>
              <td><a href=/question/{{ question_by_id.id}}/edit>{{ question_by_id.message }}</td>
              <td>{{ question_by_id.image }}</td>
+             <td>{{ question_by_id.name }}</td>
          </tr>
      </table>
 
@@ -56,6 +58,7 @@
                 <th>Vote Number</th>
                 <th>Message</th>
                 <th>Image</th>
+                <th>Answer by</th>
             </tr>
 
             <tr>
@@ -66,6 +69,7 @@
                         <td>{{ answer.vote_number }}</td>
                         <td><a href=/answer/{{ answer.id}}/edit>{{ answer.message }}</td>
                         <td>{{ answer.image }} </td>
+                        <td>{{ answer.name }}</td>
                     </tr>
                 {%  endfor %}
          </table>
