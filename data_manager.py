@@ -131,3 +131,12 @@ def list_all_users(cursor):
     cursor.execute(query)
     all_users = cursor.fetchall()
     return all_users
+
+@connection.connection_handler
+def add_new_user(cursor, name, password_hash):
+    submission_time = util.get_timestamp()
+    query = """ INSERT INTO username (name, submission_time, password_hash)
+                VALUES (%(name)s, %(submission_time)s, %(password_hash)s)
+    """
+
+    cursor.execute(query, {'name':name, 'submission_time':submission_time, 'password_hash':password_hash})

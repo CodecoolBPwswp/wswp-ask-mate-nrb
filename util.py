@@ -1,5 +1,6 @@
 import time
 from datetime import datetime
+import bcrypt
 
 def get_timestamp():
     time_stamp = int(time.time())
@@ -14,3 +15,9 @@ def get_vote_num():
 
 def get_view_num():
     pass
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+
+    return hashed_bytes.decode('utf-8')

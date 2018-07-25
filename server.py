@@ -1,5 +1,6 @@
 from flask import Flask, request, url_for, render_template, redirect
 import util, data_manager
+import bcrypt
 
 app = Flask(__name__)
 
@@ -58,7 +59,7 @@ def add_question():
     return render_template('/add-question.html')
 
 
-@app.route('/add-question', methods=['POST'])
+@app.route('/add-question', methods=['POST', 'GET'])
 def saving_add_question():
     if request.method == 'POST':
 
@@ -102,10 +103,31 @@ def search():
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
 
-@app.route('/registration', methods=['POST'])
+@app.route('/registration', methods=['POST', 'GET'])
 def registration():
+    if request.method == 'POST':
+        password_1 = request.form['password1']
+        password_2 = request.form['password2']
 
-    pass
+        if password_1 != password_2:
+            match = False
+
+            return render_template('registration.html', match=match)
+
+        elif password_1 == password_2:
+
+            password_hash = util.hash_password(password_1)
+            username = request.form['username']
+            data_manager.add_new_user(username, password_hash)
+            return redirect('/')
+
+    return render_template('registration.html')
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
