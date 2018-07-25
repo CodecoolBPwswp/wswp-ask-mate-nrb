@@ -23,6 +23,26 @@
 
     <br><br><br>
 
+    {% if user_answers_by_id %}
+        <h1>Answers</h1>
+         <table>
+            <tr>
+                <th>Question Title</th>
+                <th>Question Message</th>
+                <th>Answer Message</th>
+            </tr>
+
+            <tr>
+                {% for answer in user_answers_by_id %}
+                    <tr>
+                        <td>{{ answer.question_title }}</td>
+                        <td>{{ answer.question_message }}</td>
+                        <td>{{ answer.answer_message }}</td>
+                    </tr>
+                {%  endfor %}
+         </table>
+    {% endif %}
+
 
 
 
