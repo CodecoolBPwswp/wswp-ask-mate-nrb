@@ -127,11 +127,6 @@ def search():
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
 
-@app.route('/list_users', methods=['GET'])
-def list_users():
-    users_list = data_manager.list_all_users()
-    return render_template('list_users.html', users_list=users_list)
-
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():
     if request.method == 'POST':
