@@ -4,8 +4,38 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<div class="log">
+    {% if session['username'] %}
+    <form action="/" method="POST">
+        <h4>Logged in as {{ session['username'] }}</h4>
+        <label for="submit_button"></label>
+        <input formaction="{{ url_for('logout') }}" id = "submit_button" type="submit" class="link_button" value= "Logout"></button>
+    </form>
+
+     {% elif session['message'] %}
+    <form action="{{ (url_for('login')) }}" method="POST">
+        <h4>{{ session['message'] }}</h4>
+        <label for="username">Username</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Login"></button>
+    </form>
+
+    {% else %}
+    <form action="{{ (url_for('login')) }}" method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Login"></button>
+    </form>
+    {% endif %}
+</div>
 <div>
     <br><a href='/' class="link_button">Home</a><br><br>
 </div>
-    <div class="footer_class" ><p>Made by: Noémi, Réka, Jani and Bohi (we remember)</p></div>
+    <div class="footer_class" ><p>Made by: Noémi, Réka, Jani, Gábor and Bohi (we remember)</p></div>
 </html>

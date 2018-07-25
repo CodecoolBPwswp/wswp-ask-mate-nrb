@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template, redirect
+from flask import Flask, request, url_for, render_template, redirect, session, escape
 import util, data_manager
 
 app = Flask(__name__)
@@ -102,8 +102,38 @@ def search():
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
 
+@app.route('/login', methods=['POST'])
+def login():
+
+    if request.method == 'POST':
+        session['message'] = None
+
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            pw_hash = data_manager.get_hash(username)
+            if len(pw_hash) == 1:
+                password_hash = pw_hash[0]['password_hash']
+            valid = util.verify_password(password, password_hash)
+            if valid==True:
+                session['username'] = request.form['username']
+            else:
+                session['message'] = 'Invalid username or password'
+        except:
+            session['message'] = 'Invalid username or password'
+
+
+    return redirect('/')
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+   session.pop('username', None)
+   return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
+    app.secret_key = 'top_secret'
     app.run(
         host='0.0.0.0',
         port=8000,

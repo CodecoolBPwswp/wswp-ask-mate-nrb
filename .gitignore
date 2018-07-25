@@ -102,3 +102,7 @@ ENV/
 
 # idea
 .idea
+
+#sql
+
+/sample_data/askmatepart2-sample-data.sql
