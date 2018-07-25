@@ -182,12 +182,6 @@ def logout():
    return redirect(url_for('index'))
 
 
-
-@app.route('/registration', methods=['POST'])
-def registration():
-
-    pass
-
 if __name__ == '__main__':
     app.secret_key = 'top_secret'
     app.run(
