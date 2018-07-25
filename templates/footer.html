@@ -12,9 +12,9 @@
         <input formaction="{{ url_for('logout') }}" id = "submit_button" type="submit" class="link_button" value= "Logout"></button>
     </form>
 
-     {% elif invalid %}
+     {% elif session['message'] %}
     <form action="{{ (url_for('login')) }}" method="POST">
-        <h4>{{ invalid }}</h4>
+        <h4>{{ session['message'] }}</h4>
         <label for="username">Username</label>
         <input type="text" name="username">
         <label for="password">Password</label>

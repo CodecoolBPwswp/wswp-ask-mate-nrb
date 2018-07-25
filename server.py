@@ -106,6 +106,8 @@ def search():
 def login():
 
     if request.method == 'POST':
+        session['message'] = None
+
         try:
             username = request.form['username']
             password = request.form['password']
@@ -115,9 +117,12 @@ def login():
             valid = util.verify_password(password, password_hash)
             if valid==True:
                 session['username'] = request.form['username']
+            else:
+                session['message'] = 'Invalid username or password'
         except:
-            invalid = 'Invalid username or password'
-            return render_template('index.html', invalid=invalid)
+            session['message'] = 'Invalid username or password'
+
+
     return redirect('/')
 
 
