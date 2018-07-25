@@ -7,16 +7,26 @@
     <form action="{{ url_for('registration') }}" method='POST'>
 
         <label for="username"> Username</label> <br>
-        <input type="text" id="username" name="username" required><br>
+        <input type="text" id="username" name="username"
+                {% if exist_username and username %}
+                    value="Username already exists"
+                {% elif not exist_username %}
+                    value="{{ username }}"
+                {% endif %} required><br>
 
-        <label for="password1">Password:</label> <br>
-        <input type="password" id="password1" name="password1" required><br>
-        <label for="password2">Confirm Password:</label> <br>
-        <input type="password" id="password2" name="password2" required><br>
+        {% if exist_username %}
+        <input type="submit" class="link_button" value="Verify">
+        {% endif %}
 
-        <label for="submit_button"></label> <br>
-        <input id = "submit_button" type="submit" class="link_button" value= "Submit"></button><br>
+        {% if not exist_username %}
+            <label for="password1">Password:</label> <br>
+            <input type="password" id="password1" name="password1" required><br>
+            <label for="password2">Confirm Password:</label> <br>
+            <input type="password" id="password2" name="password2" required><br>
 
+            <label for="submit_button"></label> <br>
+            <input id = "submit_button" type="submit" class="link_button" value= "Submit"></button><br>
+        {% endif %}
     </form>
 
     <p> {% if match == False %} The passwords do not match. Please try again. {% endif %}
