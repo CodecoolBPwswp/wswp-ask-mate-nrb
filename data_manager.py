@@ -106,6 +106,29 @@ def get_answer_by_id(cursor, answer_id):
 
     return answer_by_id
 
+
+@connection.connection_handler
+def edit_question(cursor, edited_question):
+    cursor.execute("""UPDATE question
+                        SET title=%(title)s, message=%(message)s
+                        WHERE id=%(id)s""", edited_question)
+
+
+@connection.connection_handler
+def delete_answer(cursor, id):
+    cursor.execute("""DELETE FROM answer
+                        WHERE id = %(id)s""", {"id": id})
+
+
+@connection.connection_handler
+def delete_question(cursor, id):
+    cursor.execute("""DELETE FROM answer
+                        WHERE question_id = %(id)s""", {"id": id})
+    cursor.execute("""DELETE FROM question
+                        WHERE id = %(id)s""", {"id": id})
+
+
+
 @connection.connection_handler
 def edit_answer(cursor, edited_answer):
     query = """ UPDATE answer
@@ -125,7 +148,7 @@ def sort_question(cursor, order_by):
 
 @connection.connection_handler
 def list_all_users(cursor):
-    query = """SELECT username.id, username.name, username.date
+    query = """SELECT username.id, username.name, username.submission_time
             FROM username
             """
     cursor.execute(query)

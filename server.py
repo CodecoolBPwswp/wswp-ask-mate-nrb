@@ -58,8 +58,32 @@ def adding_answer(question_id):
 def add_question():
     return render_template('/add-question.html')
 
+@app.route('/question/<id>/edit', methods=['POST', 'GET'])
+def edit_question(id):
+    if request.method == 'POST':
+        edited_question = {"id": id,
+                           "title": request.form["title"],
+                           "message": request.form["message"]}
+        data_manager.edit_question(edited_question)
+        return redirect('/question/' + '{}'.format(edited_question['id']))
+    else:
+        return render_template('edit_question.html', question_by_id=data_manager.get_question_by_id(id))
 
-@app.route('/add-question', methods=['POST', 'GET'])
+
+@app.route('/answer/<id>/delete', methods=['POST'])
+def delete_answer(id):
+    data_manager.delete_answer(id)
+    question_id = request.form['question_id']
+    return redirect('/question/' + '{}'.format(question_id))
+
+
+@app.route('/question/<id>/delete', methods=['POST'])
+def delete_question(id):
+    data_manager.delete_question(id)
+    return redirect('/')
+
+
+@app.route('/add-question', methods=['POST'])
 def saving_add_question():
     if request.method == 'POST':
 
@@ -102,6 +126,11 @@ def search():
 
         return render_template('results_search.html', result_search=result_search, search_phrase=search_phrase)
 
+
+@app.route('/list_users', methods=['GET'])
+def list_users():
+    users_list = data_manager.list_all_users()
+    return render_template('list_users.html', users_list=users_list)
 
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():

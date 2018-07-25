@@ -16,6 +16,10 @@
 
         <label for="submit_button"></label><br>
         <input id="submit_button" type="submit" value="Edit answer" ><br>
-  </form>
+  </form><br/>
+    <form action='/answer/{{ answer[0]['id'] }}/delete' method='POST'>
+        <input type="hidden" id="question_id" name="question_id" value="{{ answer[0]['question_id'] }}">
+        <button type="submit" onclick="return confirm('Are you sure to delete this answer?');">Delete answer</button>
+    </form>
 
 {% endblock %}

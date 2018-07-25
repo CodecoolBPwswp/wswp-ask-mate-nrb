@@ -127,7 +127,7 @@ ALTER TABLE ONLY question_tag
     ADD CONSTRAINT fk_tag_id FOREIGN KEY (tag_id) REFERENCES tag(id);
 
 
-INSERT INTO username VALUES (1, 'Lennon','2018-07-24 09:57:00', '$2b$12$NpE.e.INpHHOXCXFG6E6/u7UanWyxLRcA354itq5vQAYdasIhO25q');
+INSERT INTO username VALUES (0, 'Lennon','2018-07-24 09:57:00', '$2b$12$NpE.e.INpHHOXCXFG6E6/u7UanWyxLRcA354itq5vQAYdasIhO25q');
 INSERT INTO question VALUES (0, '2017-04-28 08:29:00', 29, 7, 'How to make lists in Python?', 'I am totally new to this, any hints?', NULL,1);
 INSERT INTO question VALUES (1, '2017-04-29 09:19:00', 15, 9, 'Wordpress loading multiple jQuery Versions', 'I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $(".myBook").booklet();
 

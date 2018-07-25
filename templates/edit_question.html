@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h1>Update question</h1>
+  <form action="/question/{{ question_by_id.id }}/edit" method="POST">
+
+    <label>Title:</label></br>
+    <input type="text" name="title" maxlength="50" required value="{{ question_by_id.title }}"></br></br>
+
+    <label>Message:</label></br>
+    <textarea name="message" rows="18" cols="100" maxlength="10000">{{question_by_id.message }}</textarea></br></br>
+
+      <button type="submit">Save changes</button><br/>
+    </form><br/>
+    <form action='/question/{{ question_by_id.id }}/delete' method='POST'>
+        <button type="submit" onclick="return confirm('Are you sure to delete this question?');">Delete question</button>
+    </form>
+
+
+{% endblock %}
