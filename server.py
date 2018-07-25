@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template, redirect
+from flask import Flask, request, url_for, render_template, redirect, session, escape
 import util, data_manager
 import bcrypt
 
@@ -158,8 +158,38 @@ def list_users():
     users_list = data_manager.list_all_users()
     return render_template('list_users.html', users_list=users_list)
 
+@app.route('/login', methods=['POST'])
+def login():
+
+    if request.method == 'POST':
+
+        username = request.form['username']
+        password = request.form['password']
+        pw_hash = data_manager.get_hash(username)
+        if len(pw_hash) == 1:
+            password_hash = pw_hash[0]['password_hash']
+        valid = util.verify_password(password, password_hash)
+        if valid==True:
+            session['username'] = request.form['username']
+
+
+        return redirect('/')
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+   session.pop('username', None)
+   return redirect(url_for('index'))
+
+
+
+@app.route('/registration', methods=['POST'])
+def registration():
+
+    pass
 
 if __name__ == '__main__':
+    app.secret_key = 'top_secret'
     app.run(
         host='0.0.0.0',
         port=8000,

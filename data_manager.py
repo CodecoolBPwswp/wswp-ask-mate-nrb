@@ -168,3 +168,12 @@ def add_new_user(cursor, name, password_hash):
     """
 
     cursor.execute(query, {'name':name, 'submission_time':submission_time, 'password_hash':password_hash})
+
+@connection.connection_handler
+def get_hash(cursor, username):
+    query="""SELECT password_hash
+            FROM username
+            WHERE name = %(name)s"""
+    cursor.execute(query, {'name':username})
+    hash= cursor.fetchall()
+    return hash
