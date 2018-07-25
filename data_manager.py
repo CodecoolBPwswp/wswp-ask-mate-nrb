@@ -5,7 +5,8 @@ import util
 @connection.connection_handler
 def read_all_questions(cursor):
     query = """ 
-                SELECT * FROM  question"""
+                SELECT question.*, username.name FROM question JOIN username
+                ON question.user_id = username.id"""
     cursor.execute(query)
     questions=cursor.fetchall()
     return questions
@@ -14,8 +15,9 @@ def read_all_questions(cursor):
 @connection.connection_handler
 def get_question_by_id(cursor, id):
     query = """
-                SELECT * FROM question
-                WHERE id=%(id)s"""
+                SELECT question.*, username.name FROM question JOIN username
+                ON question.user_id = username.id
+                WHERE question.id=%(id)s"""
     cursor.execute(query, {'id': id})
     question_by_id=cursor.fetchone()
     return question_by_id
@@ -24,7 +26,8 @@ def get_question_by_id(cursor, id):
 @connection.connection_handler
 def get_answer_by_question_id(cursor, id):
     query = """
-                SELECT * FROM answer
+                SELECT answer.*, username.name FROM answer JOIN username
+                ON answer.user_id = username.id
                 WHERE question_id = %(id)s"""
     cursor.execute(query, {'id': id})
     answer_by_question_id=cursor.fetchall()
@@ -88,7 +91,8 @@ def search_by_words(cursor, search_words):
 @connection.connection_handler
 def read_the_last_five_question(cursor):
     query = """
-            SELECT * FROM question
+            SELECT question.*, username.name FROM question JOIN username
+            ON question.user_id = username.id 
             ORDER BY submission_time DESC 
             LIMIT 5"""
     cursor.execute(query)
@@ -139,7 +143,8 @@ def edit_answer(cursor, edited_answer):
 @connection.connection_handler
 def sort_question(cursor, order_by):
 
-    query = """SELECT * FROM question
+    query = """SELECT question.*, username.name FROM question JOIN username
+            ON question.user_id = username.id 
             ORDER BY {} {}""".format(order_by['column'], order_by['order'], order_by)
     cursor.execute(query)
     new_order= cursor.fetchall()
