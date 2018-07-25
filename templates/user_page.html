@@ -37,7 +37,7 @@
                     <tr>
                         <td>{{ answer.question_title }}</td>
                         <td>{{ answer.question_message }}</td>
-                        <td>{{ answer.answer_message }}</td>
+                        <td><a href=/answer/{{ answer.id}}/edit>{{ answer.answer_message }}</td>
                     </tr>
                 {%  endfor %}
          </table>
