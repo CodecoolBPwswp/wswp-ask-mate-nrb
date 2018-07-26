@@ -12,6 +12,7 @@
                     value="Username already exists"
                 {% elif not exist_username %}
                     value="{{ username }}"
+                    readonly
                 {% endif %} required><br>
 
         {% if exist_username %}
