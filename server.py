@@ -132,33 +132,41 @@ def search():
 
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():
-    if request.method == 'POST':
+
+    exist_username = True
+
+    if request.method == 'POST' and 'password1' not in request.form.keys():
+        username = request.form['username']
+        all_users_list = data_manager.list_all_users()
+        exist_username = False
+
+        for user in all_users_list:
+            if user['name'] == username:
+                exist_username = True
+        return render_template('registration.html', exist_username=exist_username, username=username)
+
+    elif request.method == 'POST' and 'password1' in request.form.keys():
         password_1 = request.form['password1']
         password_2 = request.form['password2']
+        exist_username = False
+        username = request.form['username']
 
         if password_1 != password_2:
             match = False
-
-            return render_template('registration.html', match=match)
+            return render_template('registration.html', match=match, exist_username=exist_username, username=username)
 
         elif password_1 == password_2:
-
             password_hash = util.hash_password(password_1)
-            username = request.form['username']
             data_manager.add_new_user(username, password_hash)
             return redirect('/')
 
-    return render_template('registration.html')
-
-
-
-
-
+    return render_template('registration.html', exist_username=exist_username)
 
 
 @app.route('/list_users', methods=['GET'])
 def list_users():
     users_list = data_manager.list_all_users()
+
     return render_template('list_users.html', users_list=users_list)
 
 
