@@ -34,8 +34,10 @@
     </form><br/>
     {% endif %}
 
+{% if not session['username'] %}
 <div class="link_button">
     <a href='/registration'>Registration</a>
 </div>
+{% endif %}
 </div>
 </html>
