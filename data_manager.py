@@ -156,6 +156,7 @@ def sort_question(cursor, order_by):
 def list_all_users(cursor):
     query = """SELECT username.id, username.name, username.submission_time
             FROM username
+            ORDER BY username.submission_time DESC
             """
     cursor.execute(query)
     all_users = cursor.fetchall()

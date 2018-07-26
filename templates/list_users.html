@@ -4,13 +4,11 @@
     <h1>Users:</h1>
     <table>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Registration Date</th>
         </tr>
         {% for users in users_list %}
             <tr>
-                <th>{{ users.id }}</th>
                 <th><a href="/user/{{ users.id }}">{{ users.name }}</a></th>
                 <th>{{ users.submission_time }}</th>
             </tr>
