@@ -199,11 +199,11 @@ def logout():
 
 @app.route('/user/<user_id>', methods=['POST', 'GET'])
 def list_user_questions_and_answers(user_id):
-    question_by_id = data_manager.get_question_by_id(user_id)
     user_questions_by_id = data_manager.get_user_questions_by_id(user_id)
     user_answers_by_id = data_manager.get_user_answers_by_id(user_id)
+    print(user_questions_by_id)
     return render_template('user_page.html', user_questions_by_id=user_questions_by_id,
-                           user_answers_by_id=user_answers_by_id, question_by_id=question_by_id)
+                           user_answers_by_id=user_answers_by_id)
 
 
 

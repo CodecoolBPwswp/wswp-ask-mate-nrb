@@ -47,8 +47,8 @@
              <label for="message">Please write your answer:</label> <br>
              <textarea id="message" name="message" rows="5" cols="80" maxlength=500 required></textarea><br>
 
-             <label for="image_path">Image:</label> <br>
-             <textarea id="image_path" name="image_path" rows="2" cols="80" ></textarea><br>
+{#             <label for="image_path">Image:</label> <br> #}
+             <textarea id="image_path" name="image_path" rows="2" cols="80" hidden></textarea><br>
 
             <input type="submit" class="link_button" value="Submit">
          <a href='/question/{{ question_by_id.id }}' class="link_button">Back To Question</a>

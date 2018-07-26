@@ -14,7 +14,13 @@
                 {% for questions in user_questions_by_id %}
                     <tr>
                         <!--<td>{{ questions.id }}</td>-->
-                        <td><a href="/question/{{ questions.id }}">{{ questions.title }}</a></td>
+                        <td>
+                            {% if questions.id %}
+                                <a href="/question/{{ questions.id }}">{{ questions.title }}</a>
+                            {% else %}
+                                {{ questions.title }}
+                            {% endif %}
+                        </td>
                         <td>{{ questions.message }}</td>
                     </tr>
                 {% endfor %}
@@ -37,7 +43,7 @@
                     <tr>
                         <td>{{ answer.question_title }}</td>
                         <td>{{ answer.question_message }}</td>
-                        <td><a href="/question/{{ question_by_id.id}}">{{ answer.answer_message }}</td>
+                        <td><a href="/question/{{ answer.id}}">{{ answer.answer_message }}</td>
                     </tr>
                 {%  endfor %}
          </table>

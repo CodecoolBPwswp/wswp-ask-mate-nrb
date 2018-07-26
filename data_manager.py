@@ -184,7 +184,7 @@ def get_hash(cursor, username):
 
 @connection.connection_handler
 def get_user_questions_by_id(cursor, user_id):
-    query = """ SELECT username.id, username.name,question.title AS title, question.message AS message
+    query = """ SELECT username.id, username.name, question.id, question.title AS title, question.message AS message
               FROM username LEFT JOIN question ON username.id=question.user_id
               WHERE username.id = %(user_id)s
             """
