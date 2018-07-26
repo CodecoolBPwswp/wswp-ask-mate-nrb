@@ -48,7 +48,8 @@ def adding_answer(question_id):
     question_id = question_id
     message = request.form['message']
     image = request.form['image_path']
-    new_answer = {'question_id':question_id,'message':message, 'image': image}
+    user_id = session["user_id"]
+    new_answer = {'question_id':question_id,'message':message, 'image': image, 'user_id': user_id}
     data_manager.add_answer_by_question_id(new_answer)
 
     return redirect(url_for('display_question_by_id', question_id=question_id))
@@ -89,8 +90,10 @@ def saving_add_question():
 
         title = request.form["title"]
         message = request.form["message" ]
+        user_id = session["user_id"]
+        print(user_id)
 
-        question = {'title': title, 'message': message, 'image': ''}
+        question = {'title': title, 'message': message, 'image': '', 'user_id': user_id}
         data_manager.write_question(question)
         ID = data_manager.get_question_id(title)
         return redirect('/question/{}'.format(ID[0]['id']))
@@ -129,62 +132,68 @@ def search():
 
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():
-    if request.method == 'POST':
+
+    exist_username = True
+
+    if request.method == 'POST' and 'password1' not in request.form.keys():
+        username = request.form['username']
+        all_users_list = data_manager.list_all_users()
+        exist_username = False
+
+        for user in all_users_list:
+            if user['name'] == username:
+                exist_username = True
+        return render_template('registration.html', exist_username=exist_username, username=username)
+
+    elif request.method == 'POST' and 'password1' in request.form.keys():
         password_1 = request.form['password1']
         password_2 = request.form['password2']
+        exist_username = False
+        username = request.form['username']
 
         if password_1 != password_2:
             match = False
-
-            return render_template('registration.html', match=match)
+            return render_template('registration.html', match=match, exist_username=exist_username, username=username)
 
         elif password_1 == password_2:
-
             password_hash = util.hash_password(password_1)
-            username = request.form['username']
             data_manager.add_new_user(username, password_hash)
             return redirect('/')
 
-    return render_template('registration.html')
-
-
-
-
-
+    return render_template('registration.html', exist_username=exist_username)
 
 
 @app.route('/list_users', methods=['GET'])
 def list_users():
     users_list = data_manager.list_all_users()
+
     return render_template('list_users.html', users_list=users_list)
+
 
 @app.route('/login', methods=['POST'])
 def login():
-
     if request.method == 'POST':
         session['message'] = None
-
         try:
             username = request.form['username']
             password = request.form['password']
-            pw_hash = data_manager.get_hash(username)
-            if len(pw_hash) == 1:
-                password_hash = pw_hash[0]['password_hash']
-            valid = util.verify_password(password, password_hash)
+            user_details = data_manager.get_hash(username)
+            valid = util.verify_password(password, user_details["password_hash"])
             if valid==True:
-                session['username'] = request.form['username']
+                session["user_id"] = user_details["id"]
+                session["username"] = user_details["name"]
             else:
                 session['message'] = 'Invalid username or password'
         except:
             session['message'] = 'Invalid username or password'
-
-
     return redirect('/')
 
 
 @app.route('/logout', methods=['POST'])
 def logout():
    session.pop('username', None)
+   session.pop('message', None)
+   session.pop('user_id', None)
    return redirect(url_for('index'))
 
 
