@@ -206,3 +206,19 @@ def get_user_answers_by_id(cursor, user_id):
     answers_by_id = cursor.fetchall()
     return answers_by_id
 
+
+@connection.connection_handler
+def update_status(cursor, edited_answer):
+    query="""UPDATE answer
+            SET status='accepted'
+            WHERE id = %(id)s"""
+    cursor.execute(query, edited_answer)
+
+@connection.connection_handler
+def get_question_id_by_answer_id(cursor, answer_id):
+    query="""SELECT question_id
+            FROM answer
+            WHERE answer_id = %(answer_id)s"""
+    cursor.execute(query, {'answer_id':answer_id})
+    question_id= cursor.fetchall()
+    return question_id

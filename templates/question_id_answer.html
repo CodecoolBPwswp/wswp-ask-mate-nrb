@@ -61,6 +61,7 @@
          <table>
             <tr>
                 <!--<th>Id</th>-->
+                <th>Status</th>
                 <th>Submission Time</th>
                 <th>Vote Number</th>
                 <th>Message</th>
@@ -72,6 +73,18 @@
                 {% for answer in answers_by_question_id %}
                     <tr>
                         <!--<td>{{ answer.id }}</td>-->
+                        <td>
+                            {% if session['user_id']==question_by_id.user_id %}
+                                {%  if answer.status is none %}
+                                    <form action='/answer/{{ answer.id }}/accept' method='POST'>
+                                        <input name='status' type="submit" class="link_button" value="Accept">
+                                    </form>
+                                {% else %}
+                                    {{ answer.status }}
+                                {% endif %}
+                            {% endif %}
+                        </td>
+
                         <td>{{ answer.submission_time }}</td>
                         <td>{{ answer.vote_number }}</td>
                         <td>

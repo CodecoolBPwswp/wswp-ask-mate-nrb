@@ -77,7 +77,8 @@ CREATE TABLE username(
     password_hash text
 );
 
-
+ALTER TABLE answer
+    ADD status text;
 
 ALTER TABLE ONLY username
     ADD CONSTRAINT pk_user_id PRIMARY KEY (id);

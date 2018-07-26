@@ -134,14 +134,13 @@ def search():
 def registration():
 
     exist_username = True
-    username = request.form['username']
 
     if request.method == 'GET':
         return render_template('registration.html', exist_username=exist_username)
-
     elif request.method == 'POST' and 'password1' not in request.form.keys():
         all_users_list = data_manager.list_all_users()
         exist_username = False
+        username = request.form['username']
 
         for user in all_users_list:
             if user['name'] == username:
@@ -152,6 +151,7 @@ def registration():
         password_1 = request.form['password1']
         password_2 = request.form['password2']
         exist_username = False
+        username = request.form['username']
 
         if password_1 != password_2:
             match = False
@@ -206,6 +206,22 @@ def list_user_questions_and_answers(user_id):
     return render_template('user_page.html', user_questions_by_id=user_questions_by_id,
                            user_answers_by_id=user_answers_by_id)
 
+
+
+
+
+
+@app.route('/answer/<answer_id>/accept', methods=['POST'])
+def update_answer_status(answer_id):
+    if request.method == 'POST':
+
+        edited_status = request.form['status']
+
+        edited_answer = {'status': edited_status,'id': answer_id}
+        data_manager.update_status(edited_answer)
+        ID= data_manager.get_question_id_by_answer_id
+
+        return redirect('/question/{}'.format(ID[0]['id']))
 
 
 
