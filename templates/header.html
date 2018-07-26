@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div class="log">
+    {% if session['username'] %}
+    <form action="/" method="POST">
+        <h4>Logged in as {{ session['username'] }}</h4>
+        <label for="submit_button"></label>
+        <input formaction="{{ url_for('logout') }}" id = "submit_button" type="submit" class="link_button" value= "Logout"></button>
+    </form>
+
+     {% elif session['message'] %}
+    <form action="{{ (url_for('login')) }}" method="POST">
+        <h4>{{ session['message'] }}</h4>
+        <label for="username">Username</label>
+        <input type="text" name="username"><br>
+        <label for="password">Password </label>
+        <input type="password" name="password"><br/>
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Login"></button>
+    </form>
+
+    {% else %}
+    <form action="{{ (url_for('login')) }}" method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username"><br/>
+        <label for="password">Password </label>
+        <input type="password" name="password"><br/>
+        <label for="submit_button"></label>
+        <input id = "submit_button" type="submit" class="link_button" value= "Login"></button>
+    </form><br/>
+    {% endif %}
+
+<div class="link_button">
+    <a href='/registration'>Registration</a>
+</div>
+</div>
+</html>
