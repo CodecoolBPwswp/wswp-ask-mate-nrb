@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template, redirect
+from flask import Flask, request, url_for, render_template, redirect, session, escape
 import util, data_manager
 import bcrypt
 
@@ -48,7 +48,8 @@ def adding_answer(question_id):
     question_id = question_id
     message = request.form['message']
     image = request.form['image_path']
-    new_answer = {'question_id':question_id,'message':message, 'image': image}
+    user_id = session["user_id"]
+    new_answer = {'question_id':question_id,'message':message, 'image': image, 'user_id': user_id}
     data_manager.add_answer_by_question_id(new_answer)
 
     return redirect(url_for('display_question_by_id', question_id=question_id))
@@ -89,8 +90,10 @@ def saving_add_question():
 
         title = request.form["title"]
         message = request.form["message" ]
+        user_id = session["user_id"]
+        print(user_id)
 
-        question = {'title': title, 'message': message, 'image': ''}
+        question = {'title': title, 'message': message, 'image': '', 'user_id': user_id}
         data_manager.write_question(question)
         ID = data_manager.get_question_id(title)
         return redirect('/question/{}'.format(ID[0]['id']))
@@ -167,7 +170,35 @@ def list_users():
     return render_template('list_users.html', users_list=users_list)
 
 
+@app.route('/login', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        session['message'] = None
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            user_details = data_manager.get_hash(username)
+            valid = util.verify_password(password, user_details["password_hash"])
+            if valid==True:
+                session["user_id"] = user_details["id"]
+                session["username"] = user_details["name"]
+            else:
+                session['message'] = 'Invalid username or password'
+        except:
+            session['message'] = 'Invalid username or password'
+    return redirect('/')
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+   session.pop('username', None)
+   session.pop('message', None)
+   session.pop('user_id', None)
+   return redirect(url_for('index'))
+
+
 if __name__ == '__main__':
+    app.secret_key = 'top_secret'
     app.run(
         host='0.0.0.0',
         port=8000,

@@ -28,6 +28,7 @@
                 <th>Title</th>
                 <th>Message</th>
                 <th>Image</th>
+                <th>Question by</th>
             </tr>
             {% for question in all_question %}
                 <tr>
@@ -38,6 +39,7 @@
                     <td><a href="/question/{{ question.id }}">{{ question.title }}</a></td>
                     <td>{{ question.message }}</td>
                     <td>{{ question.image }}</td>
+                    <td>{{ question.name }}</td>
                 </tr>
             {% endfor %}
         </table>
