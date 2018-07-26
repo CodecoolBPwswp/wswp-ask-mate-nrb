@@ -28,7 +28,8 @@ def get_answer_by_question_id(cursor, id):
     query = """
                 SELECT answer.*, username.name FROM answer JOIN username
                 ON answer.user_id = username.id
-                WHERE question_id = %(id)s"""
+                WHERE question_id = %(id)s
+                ORDER BY submission_time DESC"""
     cursor.execute(query, {'id': id})
     answer_by_question_id=cursor.fetchall()
     return answer_by_question_id
@@ -210,15 +211,6 @@ def get_user_answers_by_id(cursor, user_id):
 @connection.connection_handler
 def update_status(cursor, edited_answer):
     query="""UPDATE answer
-            SET status='accepted'
+            SET status='Accepted'
             WHERE id = %(id)s"""
     cursor.execute(query, edited_answer)
-
-@connection.connection_handler
-def get_question_id_by_answer_id(cursor, answer_id):
-    query="""SELECT question_id
-            FROM answer
-            WHERE answer_id = %(answer_id)s"""
-    cursor.execute(query, {'answer_id':answer_id})
-    question_id= cursor.fetchall()
-    return question_id
