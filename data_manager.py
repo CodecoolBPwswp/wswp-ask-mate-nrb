@@ -177,3 +177,19 @@ def get_hash(cursor, username):
     cursor.execute(query, {'name':username})
     hash= cursor.fetchone()
     return hash
+
+@connection.connection_handler
+def update_status(cursor, edited_answer):
+    query="""UPDATE answer
+            SET status='accepted'
+            WHERE id = %(id)s"""
+    cursor.execute(query, edited_answer)
+
+@connection.connection_handler
+def get_question_id_by_answer_id(cursor, answer_id):
+    query="""SELECT question_id
+            FROM answer
+            WHERE answer_id = %(answer_id)s"""
+    cursor.execute(query, {'answer_id':answer_id})
+    question_id= cursor.fetchall()
+    return question_id

@@ -197,6 +197,22 @@ def logout():
    return redirect(url_for('index'))
 
 
+
+
+@app.route('/answer/<answer_id>/accept', methods=['POST'])
+def update_answer_status(answer_id):
+    if request.method == 'POST':
+
+        edited_status = request.form['status']
+
+        edited_answer = {'status': edited_status,'id': answer_id}
+        data_manager.update_status(edited_answer)
+        ID= data_manager.get_question_id_by_answer_id
+
+        return redirect('/question/{}'.format(ID[0]['id']))
+
+
+
 if __name__ == '__main__':
     app.secret_key = 'top_secret'
     app.run(
