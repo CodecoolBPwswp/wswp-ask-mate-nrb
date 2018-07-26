@@ -7,19 +7,19 @@
         <tr>
             <!--<th>Id</th>-->
             <th>Submission Time</th>
-            <th>View Number</th>
-            <th>Vote Number</th>
+{#            <th>View Number</th>#}
+{#            <th>Vote Number</th>#}
             <th>Title</th>
             <th>Message</th>
-            <th>Image</th>
+{#            <th>Image</th>#}
             <th>Question by</th>
         </tr>
 
          <tr>
              <!--<td>{{ question_by_id.id }}</td>-->
              <td>{{ question_by_id.submission_time }}</td>
-             <td>{{ question_by_id.view_number }}</td>
-             <td>{{ question_by_id.vote_number }}</td>
+{#             <td>{{ question_by_id.view_number }}</td>#}
+{#             <td>{{ question_by_id.vote_number }}</td>#}
              <td>{{ question_by_id.title }}</td>
              <td>
                  {% if session["user_id"] == question_by_id.user_id %}
@@ -28,7 +28,7 @@
                     {{ question_by_id.message }}
                  {% endif %}
              </td>
-             <td>{{ question_by_id.image }}</td>
+{#             <td>{{ question_by_id.image }}</td>#}
              <td>{{ question_by_id.name }}</td>
          </tr>
      </table>
@@ -63,9 +63,9 @@
                 <!--<th>Id</th>-->
                 <th>Status</th>
                 <th>Submission Time</th>
-                <th>Vote Number</th>
+{#                <th>Vote Number</th>#}
                 <th>Message</th>
-                <th>Image</th>
+{#                <th>Image</th>#}
                 <th>Answer by</th>
             </tr>
 
@@ -82,11 +82,17 @@
                                 {% else %}
                                     {{ answer.status }}
                                 {% endif %}
+                            {% else %}
+                                {% if answer.status is none %}
+                                    Not yet accepted
+                                {% else %}
+                                    {{ answer.status }}
+                                {% endif %}
                             {% endif %}
                         </td>
 
                         <td>{{ answer.submission_time }}</td>
-                        <td>{{ answer.vote_number }}</td>
+{#                        <td>{{ answer.vote_number }}</td>#}
                         <td>
                             {% if session["user_id"] == answer.user_id %}
                                 <a href=/answer/{{ answer.id}}/edit>{{ answer.message }}</a>
@@ -94,7 +100,7 @@
                                 {{ answer.message }}
                             {% endif %}
                         </td>
-                        <td>{{ answer.image }} </td>
+{#                        <td>{{ answer.image }} </td>#}
                         <td>{{ answer.name }}</td>
                     </tr>
                 {%  endfor %}

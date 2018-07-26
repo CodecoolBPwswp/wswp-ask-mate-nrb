@@ -57,10 +57,7 @@ a:visited {
 }
 
 .log {
-    display: inline;
-    position: fixed;
-    right: 10px;
-    top: 50px;
+    float:right;
 }
 
 .footer_class {

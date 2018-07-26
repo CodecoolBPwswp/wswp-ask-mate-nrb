@@ -219,9 +219,9 @@ def update_answer_status(answer_id):
 
         edited_answer = {'status': edited_status,'id': answer_id}
         data_manager.update_status(edited_answer)
-        ID= data_manager.get_question_id_by_answer_id
+        ID= data_manager.get_answer_by_id(answer_id)[0]['question_id']
 
-        return redirect('/question/{}'.format(ID[0]['id']))
+        return redirect('/question/{}'.format(ID))
 
 
 
