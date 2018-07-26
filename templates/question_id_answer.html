@@ -82,6 +82,12 @@
                                 {% else %}
                                     {{ answer.status }}
                                 {% endif %}
+                            {% else %}
+                                {% if answer.status is none %}
+                                    Not yet accepted
+                                {% else %}
+                                    {{ answer.status }}
+                                {% endif %}
                             {% endif %}
                         </td>
 
