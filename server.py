@@ -134,14 +134,13 @@ def search():
 def registration():
 
     exist_username = True
-    username = request.form['username']
 
     if request.method == 'GET':
         return render_template('registration.html', exist_username=exist_username)
-
     elif request.method == 'POST' and 'password1' not in request.form.keys():
         all_users_list = data_manager.list_all_users()
         exist_username = False
+        username = request.form['username']
 
         for user in all_users_list:
             if user['name'] == username:
@@ -152,6 +151,7 @@ def registration():
         password_1 = request.form['password1']
         password_2 = request.form['password2']
         exist_username = False
+        username = request.form['username']
 
         if password_1 != password_2:
             match = False
