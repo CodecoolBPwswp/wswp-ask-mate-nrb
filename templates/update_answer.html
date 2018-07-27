@@ -11,8 +11,8 @@
         <label for="message"> Message:</label> <br>
         <textarea id="message" name="message" rows="5" cols="80" minlength=5 required>{{ answer[0]['message'] }}</textarea><br>
 
-        <label for="image"> Image:</label> <br>
-        <textarea id="image" name="image" rows="1" cols="40">{{answer[0]['image'] }}</textarea><br>
+{#          <label for="image"> Image:</label> <br>  #}
+        <textarea id="image" name="image" rows="1" cols="40" hidden>{{answer[0]['image'] }}</textarea><br>
 
         <label for="submit_button"></label><br>
         <input id="submit_button" type="submit" value="Edit answer" ><br>
